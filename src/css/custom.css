@@ -13,6 +13,10 @@
   --band-deadlines: #f3f1f6; /* lilac for deadlines */
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /* --------------------------------------------------
    Shared helpers
 -------------------------------------------------- */
@@ -96,6 +100,7 @@
   line-height: 1.3;
   text-decoration: none;
   color: var(--brand);
+  text-decoration: none !important;
 }
 
 .top-needs__item:not(:first-child)::before {
@@ -136,16 +141,17 @@
 .do-first__title {
   margin: 0 0 8px 0;
   font-weight: 700;
-  font-size: clamp(22px, 2.6vw, 28px);
+  font-size: clamp(22px, 2.6vw, 2.3125rem);
   color: var(--ink);
   letter-spacing: -0.01em;
+  padding-bottom: 1rem;
 }
 
 .do-first__lede {
   margin: 0 0 16px 0;
-  color: var(--muted);
+  /* color: var(--muted); */
   line-height: 1.6;
-  max-width: 60ch;
+  max-width: 65ch;
 }
 
 .do-first__card {
@@ -160,7 +166,7 @@
   grid-template-columns: 36px 1fr;
   gap: 14px;
   align-items: start;
-  padding: 18px;
+  padding: 2.25rem 2rem;
   position: relative;
 }
 
@@ -177,7 +183,7 @@
 
 .do-first__content h3 {
   margin: 2px 0 6px 0;
-  font-size: clamp(16px, 2.1vw, 18px);
+  font-size: clamp(16px, 2.1vw, 1.4375rem);
   line-height: 1.35;
   font-weight: 700;
   color: var(--ink);
@@ -563,6 +569,15 @@
     margin: 0;
     border-radius: 0;
     transform: translateZ(0.001px); /* avoids faint 1px edges */
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-disaster .hero__image {
+    left: auto;
+    transform: none;
+    width: 100%;
+    overflow: hidden; /* optional: prevents subpixel bleed */
   }
 }
 
