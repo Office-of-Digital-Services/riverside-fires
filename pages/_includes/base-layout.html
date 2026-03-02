@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <title>{{ title }} | CA.gov</title>
+    <meta charset="utf-8" />
+    <meta name="Author" content="State of California" />
+    <meta name="Description" content="{{ description }}" />
+    {%- if noindex %}
+    <meta name="robots" content="noindex" />
+    {%- elseif noindex_follow %}
+    <meta name="robots" content="noindex, follow" />
+    {%- else %}
+    <meta name="robots" content="index, follow" />
+    {%- endif %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="{{ title }}" />
+
+    <!-- Canonical link, improves SEO -->
+    <link href="{{ canonical }}" rel="canonical" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="{{ lang }}" />
+    <meta property="og:site_name" content="{{ title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ canonical }}" />
+    <meta property="og:title" content="{{ title }}" />
+    {% if events %}
+    <meta
+      property="og:description"
+      content="You’re invited! Events celebrating California’s 175th Birthday" />
+    {% else %}
+    <meta property="og:description" content="{{ description }}" />
+    {% endif %} {% if events %}
+    <meta
+      property="og:image"
+      content="https://www.celebrate.ca.gov/images/ca175-events.jpg" />
+    {% else %}
+    <meta
+      property="og:image"
+      content="https://www.celebrate.ca.gov/images/ca175-social.jpg" />
+    {% endif %}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{ canonical }}" />
+    <meta name="twitter:title" content="{{ title }}" />
+
+    {% if events %}
+    <meta
+      name="twitter:description"
+      content="You’re invited! Events celebrating California’s 175th Birthday" />
+    {% else %}
+    <meta name="twitter:description" content="{{ description }}" />
+    {% endif %} {% if events %}
+    <meta
+      name="twitter:image"
+      content="https://www.celebrate.ca.gov/images/ca175-events.jpg" />
+    {% else %}
+    <meta
+      name="twitter:image"
+      content="https://www.celebrate.ca.gov/images/ca175-social.jpg" />
+    {% endif %}
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- FONT-->
+    <!-- Preconnects and preloads -->
+
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4NJuktqUYLkn8BJ.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/CaGov.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin />
+
+
+    <link href="/css/styles.min.css?vFeb_" rel="stylesheet" />
+
+    {%- if customcss -%}
+    <link rel="stylesheet" href="{{ customcss }}" />
+    {%- endif -%}
+
+    <!-- SCRIPTS-->
+    <script src="/js/template.js?vFeb" defer></script>
+    <script src="/js/translate.js?vFeb" defer></script>
+
+    {% if script %}
+    <script
+      src="https://code.createjs.com/1.0.0/createjs.min.js"
+      defer></script>
+    <script src="/js/scripts.min.js?vOct" defer></script>
+    {% endif %}
+
+    <!-- BEGIN Google Analytics -->
+   
+    <!-- END Google Analytics -->
+    <!-- Statewide Alerts Server -->
+    <script
+      defer
+      src="https://alert.cdt.ca.gov"
+      crossorigin="anonymous"></script>
+  </head>
+  <body style="margin: 0px">
+    {% include 'header.html' %} {{ content | safe }} {% include 'footer.html' %}
+  </body>
+</html>

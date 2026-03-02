@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2026 Riverside Fires</title>
+    <meta
+      name="description"
+      content="Help and info for people impacted by the wildfires" />
+
+    <style>
+      #county-map {
+        position: absolute;
+        width: 1200px;
+        height: 800px;
+        left: -99999px;
+        top: -99999px;
+        visibility: hidden;
+      }
+      #county-image-output img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      #county-image-output .err {
+        color: #a00;
+      }
+      #county-image-output .ok {
+        color: #0a0;
+      }
+    </style>
+
+    <script>
+      window.HIGHLIGHTS_URL = "highlights.json";
+      window.COUNTY_HIGHLIGHTS = {
+        "Riverside County": "#F5F3F7",
+        "San Bernardino County": "#F5F3F7"
+      };
+    </script>
+  </head>
+
+  <body>
+    <div id="main-content" class="main-content">
+      <main>
+        <div class="section-default bg-gray-75 hero-disaster">
+          <div class="container p-y-md">
+            <!-- Breadcrumbs removed: replace with your site breadcrumb HTML if needed -->
+
+            <div class="row g-0 align-items-center">
+              <div class="col-12 col-lg-7 p-r-lg hero__copy">
+                <h1 class="m-t-0">2026 Riverside Fires</h1>
+                <p class="lead m-b-0">
+                  Help and info for people impacted by the wildfires
+                </p>
+              </div>
+
+              <div class="col-12 col-lg-5 p-l-lg mt-3 mt-lg-0 hero__image">
+                <figure class="m-0">
+                  <img
+                    src="images/riverside.png"
+                    alt="Map highlighting Riverside and San Bernardino counties in Southern California"
+                    loading="lazy"
+                    decoding="async" />
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="top-needs" aria-labelledby="top-needs-heading">
+          <div class="container">
+            <h2 id="top-needs-heading" class="top-needs__title">Top needs</h2>
+            <nav class="top-needs__nav" aria-label="Top needs">
+              <a class="top-needs__item" href="/food-shelter"
+                >Get food &amp; shelter</a
+              >
+              <a class="top-needs__item" href="/real-time-info"
+                >See real-time info</a
+              >
+              <a class="top-needs__item" href="/disaster-centers"
+                >Find a disaster center</a
+              >
+            </nav>
+          </div>
+        </section>
+
+        <section class="do-first" aria-labelledby="do-first-heading">
+          <div class="container">
+            <h2 id="do-first-heading" class="do-first__title">Do this first</h2>
+            <p class="do-first__lede">
+              Wildfires, earthquakes, floods—every disaster is different. Here
+              are suggestions for what to do first.
+            </p>
+
+            <div class="do-first__card" role="list">
+              <div class="do-first__item" role="listitem">
+                <span class="do-first__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor">
+                    <path
+                      d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2Zm6-6V11a6 6 0 1 0-12 0v5L4 17v2h16v-2l-2-1Z"></path>
+                  </svg>
+                </span>
+                <div class="do-first__content">
+                  <h3>Check for alerts</h3>
+                  <p>
+                    Emergency alerts will tell you how to stay safe. If you have
+                    a disability or access needs, evacuate early -- getting help
+                    takes time.
+                  </p>
+                </div>
+              </div>
+
+              <div class="do-first__item" role="listitem">
+                <span class="do-first__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor">
+                    <path d="M12 3 2 10h2v10h6v-6h4v6h6V10h2L12 3Z"></path>
+                  </svg>
+                </span>
+                <div class="do-first__content">
+                  <h3>Seek shelter</h3>
+                  <p>
+                    Call 211 and check news reports for emergency shelters in
+                    your area.
+                  </p>
+                </div>
+              </div>
+
+              <div class="do-first__item" role="listitem">
+                <span class="do-first__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor">
+                    <path
+                      d="M7 2a1 1 0 0 1 1 1v6a2 2 0 0 1-2 2H5v9H3V2h2v5h1V3a1 1 0 0 1 1-1Zm11 9h-3V3a1 1 0 1 1 2 0v5h1V3a1 1 0 1 1 2 0v8Zm-3 2h3v9h-3v-9Z"></path>
+                  </svg>
+                </span>
+                <div class="do-first__content">
+                  <h3>Find food</h3>
+                  <p>Look for an emergency shelter or local food bank.</p>
+                </div>
+              </div>
+
+              <div class="do-first__item" role="listitem">
+                <span class="do-first__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor">
+                    <path
+                      d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2Zm6.4 6.4-3 3a4 4 0 0 1-4.8 0l-3-3a8 8 0 0 1 10.8 0ZM4.6 6.4l3 3a4 4 0 0 1 0 4.8l-3 3a8 8 0 0 1 0-10.8Zm14.8 11.2-3-3a4 4 0 0 1 0-4.8l3-3a8 8 0 0 1 0 10.8Z"></path>
+                  </svg>
+                </span>
+                <div class="do-first__content">
+                  <h3>Contact a disaster relief service</h3>
+                  <p>
+                    Call 211, or contact your local emergency services or the
+                    Red Cross. In a state of emergency, your area may get a
+                    disaster center. This center can help you with all your
+                    recovery needs.
+                  </p>
+                </div>
+              </div>
+
+              <div class="do-first__item" role="listitem">
+                <span class="do-first__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor">
+                    <path
+                      d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Zm-1 13-3-3 1.4-1.4L11 11.2l3.6-3.6L16 9l-5 6Z"></path>
+                  </svg>
+                </span>
+                <div class="do-first__content">
+                  <h3>Find out if your area is safe to re-enter</h3>
+                  <p>
+                    Local officials should announce when you can return to your
+                    area.
+                  </p>
+                </div>
+              </div>
+
+              <div class="do-first__item" role="listitem">
+                <span class="do-first__icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor">
+                    <path
+                      d="M7 2h2v6H7V2Zm8 0h2v6h-2V2ZM6 10h12v3a6 6 0 1 1-12 0v-3Z"></path>
+                  </svg>
+                </span>
+                <div class="do-first__content">
+                  <h3>Ask about your utilities</h3>
+                  <p>
+                    Local officials should tell you when it’s safe to turn on
+                    your water, gas, and electricity. If the fire department has
+                    them shut off, it’s unsafe to turn them on yourself.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="get-help" aria-labelledby="get-help-heading">
+          <div class="get-help__bg">
+            <div class="container">
+              <h2 id="get-help-heading" class="get-help__title">
+                Get help now
+              </h2>
+              <div class="get-help__list">
+                <a class="get-help__card" href="/help/families">
+                  <h3 class="get-help__card-title">
+                    Help for you or your family
+                  </h3>
+                  <p class="get-help__card-desc">
+                    Get help with food, shelter, financial assistance,
+                    rebuilding, and more.
+                  </p>
+                </a>
+
+                <a class="get-help__card" href="/help/business">
+                  <h3 class="get-help__card-title">Help for your business</h3>
+                  <p class="get-help__card-desc">
+                    Find support and assistance for local business recovery.
+                  </p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="deadlines" aria-labelledby="deadlines-heading">
+          <div class="deadlines__bg">
+            <div class="container">
+              <h2 id="deadlines-heading" class="deadlines__title">
+                Upcoming deadlines
+              </h2>
+
+              <ul class="deadlines__grid" role="list">
+                <li class="deadlines__card">
+                  <div class="deadlines__meta">
+                    <span class="deadlines__icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="currentColor">
+                        <path
+                          d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 6H4v12h16V8Z"></path>
+                      </svg>
+                    </span>
+                    <time datetime="2027-11-29" class="deadlines__date"
+                      >November 29, 2027</time
+                    >
+                  </div>
+                  <a
+                    class="deadlines__link"
+                    href="/deadlines/debris-removal-opt-out"
+                    >Opt out of debris removal</a
+                  >
+                </li>
+
+                <li class="deadlines__card">
+                  <div class="deadlines__meta">
+                    <span class="deadlines__icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="currentColor">
+                        <path
+                          d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 6H4v12h16V8Z"></path>
+                      </svg>
+                    </span>
+                    <time datetime="2027-12-31" class="deadlines__date"
+                      >December 31, 2027</time
+                    >
+                  </div>
+                  <a class="deadlines__link" href="/deadlines/fema-aid"
+                    >Apply for FEMA aid</a
+                  >
+                </li>
+
+                <li class="deadlines__card">
+                  <div class="deadlines__meta">
+                    <span class="deadlines__icon" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="currentColor">
+                        <path
+                          d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 6H4v12h16V8Z"></path>
+                      </svg>
+                    </span>
+                    <time datetime="2030-05-23" class="deadlines__date"
+                      >May 23, 2030</time
+                    >
+                  </div>
+                  <a class="deadlines__link" href="/deadlines/sba-loan"
+                    >Apply for an SBA loan</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="updates-contribute" aria-labelledby="updates-heading">
+          <div class="container updates-contribute__grid">
+            <div>
+              <h2 id="updates-heading" class="uc__title">State updates</h2>
+              <ul class="uc__news" role="list">
+                <li class="uc__news-item">
+                  <a class="uc__news-link" href="/news/mlk-day-service">
+                    On MLK Day of Service, Governor Newsom and First Partner
+                    Siebel Newsom volunteer to help Los Angeles wildfire
+                    survivors January 16, 2025
+                  </a>
+                  <div class="uc__news-date">January 16, 2025</div>
+                </li>
+
+                <li class="uc__news-item">
+                  <a
+                    class="uc__news-link"
+                    href="/news/helping-impacted-regions">
+                    California continues to help individuals in regions impacted
+                    by Los Angeles fires access health care, food and water, and
+                    shelter January 16, 2025
+                  </a>
+                  <div class="uc__news-date">January 16, 2025</div>
+                </li>
+
+                <li class="uc__news-item">
+                  <a class="uc__news-link" href="/news/governor-actions">
+                    Here’s all the actions Governor Newsom has taken in response
+                    to the Los Angeles fires January 16, 2025
+                  </a>
+                  <div class="uc__news-date">January 16, 2025</div>
+                </li>
+
+                <li class="uc__news-item uc__news-item--cta">
+                  <a class="uc__news-link" href="/news"
+                    >View all 2026 Multi-county fires news</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 class="uc__title">Contribute</h2>
+              <nav class="uc__contrib" aria-label="Contribute">
+                <a class="uc__contrib-link" href="https://engaged.ca.gov/"
+                  >Join the conversation at Engaged California</a
+                >
+                <a class="uc__contrib-link" href="/donate"
+                  >Donate money to people affected</a
+                >
+                <a class="uc__contrib-link" href="/volunteer"
+                  >Volunteer your time</a
+                >
+              </nav>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
