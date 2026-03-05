@@ -1,386 +1,472 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>2026 Riverside Fires</title>
-    <meta
-      name="description"
-      content="Help and info for people impacted by the wildfires" />
+--- 
+title: Riverside Fires Recovery test page
+description: A test page for the Riverside Fires recovery site, showcasing the new design and content structure
+---
 
-    <style>
-      #county-map {
-        position: absolute;
-        width: 1200px;
-        height: 800px;
-        left: -99999px;
-        top: -99999px;
-        visibility: hidden;
-      }
-      #county-image-output img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-      }
-      #county-image-output .err {
-        color: #a00;
-      }
-      #county-image-output .ok {
-        color: #0a0;
-      }
-    </style>
+<div id="main-content" class="main-content">
+  <main>
+    <div class="banner-container">
+      <div class="container">
+        <div class="row g-0">
+          <div class="col-lg-7 riverside-gray">
+            <h1 class="mt-md-5 pt-md-4 mt-4 mb-3">2026 Riverside Fires</h1>
+            <p class="lead m-b-0">
+              Help and info for people impacted by the wildfires
+            </p>
+            <p class="call-to-action">Got questions?</p>
+            <a
+              class="btn btn-primary px-4 rounded-pill mb-5"
+              href="https://demo.ask.ca.gov"
+              >Ask CA</a
+            >
+          </div>
 
-    <script>
-      window.HIGHLIGHTS_URL = "highlights.json";
-      window.COUNTY_HIGHLIGHTS = {
-        "Riverside County": "#F5F3F7",
-        "San Bernardino County": "#F5F3F7"
-      };
-    </script>
-  </head>
+          <div class="col-lg-5 mt-lg-0 riverside-gray-2">
+            <img
+              src="images/riverside.png"
+              alt="Map highlighting Riverside and San Bernardino counties in Southern California"
+              loading="lazy"
+              decoding="async"
+              class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <body>
-    <div id="main-content" class="main-content">
-      <main>
-        <div class="section-default bg-gray-75 hero-disaster">
-          <div class="container p-y-md">
-            <!-- Breadcrumbs removed: replace with your site breadcrumb HTML if needed -->
+    <section class="top-needs" aria-labelledby="top-needs-heading">
+      <div class="container">
+        <div class="col-md-10 mx-auto">
+          <h2>Top needs</h2>
 
-            <div class="row g-0 align-items-center">
-              <div class="col-12 col-lg-7 p-r-lg hero__copy">
-                <h1 class="m-t-0">2026 Riverside Fires</h1>
-                <p class="lead m-b-0">
-                  Help and info for people impacted by the wildfires
-                </p>
-                <p class="call-to-action">Got questions?</p>
-                <a class="btn-askca" href="https://demo.ask.ca.gov">Ask CA</a>
+          <nav
+            class="d-flex flex-column flex-lg-row justify-content-between"
+            aria-label="Top needs navigation">
+            <a
+              class="h4 py-3 py-lg-2 mt-0 mb-0 color-p2 color-primary-hover no-underline"
+              href="/food-shelter"
+              >Get food &amp; shelter</a
+            >
+            <span class="brd"></span>
+            <a
+              class="h4 py-3 py-lg-2 mt-0 mb-0 color-p2 color-primary-hover no-underline"
+              href="/real-time-info"
+              >See real-time info</a
+            >
+            <span class="brd"></span>
+            <a
+              class="h4 py-3 py-lg-2 mt-0 mb-0 color-p2 color-primary-hover no-underline"
+              href="/disaster-centers"
+              >Find a disaster center</a
+            >
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="do-first" aria-labelledby="do-first-heading">
+      <div class="container pt-md-5">
+        <div class="col-lg-10 mx-auto">
+          <h2>Do this first</h2>
+          <p class="lead">
+            Wildfires, earthquakes, floods—every disaster is different. Here are
+            suggestions for what to do first.
+          </p>
+
+          <section
+            class="do-first do-first--stack"
+            aria-labelledby="do-first-heading">
+            <div class="container">
+              <ol class="do-first__list" role="list">
+                <li class="do-first__item">
+                  <div class="do-first__icon">
+                    <!-- bell/alert svg -->
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="36"
+                      height="40"
+                      viewBox="0 0 24 30"
+                      class="width-25"
+                      fill="none">
+                      <path
+                        d="M0 25.5V22.5H3V12C3 9.925 3.625 8.08125 4.875 6.46875C6.125 4.85625 7.75 3.8 9.75 3.3V0H14.25V3.3C16.25 3.8 17.875 4.85625 19.125 6.46875C20.375 8.08125 21 9.925 21 12V22.5H24V25.5H0ZM12 30C11.175 30 10.4688 29.7062 9.88125 29.1187C9.29375 28.5312 9 27.825 9 27H15C15 27.825 14.7063 28.5312 14.1188 29.1187C13.5313 29.7062 12.825 30 12 30ZM10.5 16.5H13.5V9H10.5V16.5ZM12 21C12.425 21 12.7812 20.8562 13.0688 20.5687C13.3563 20.2812 13.5 19.925 13.5 19.5C13.5 19.075 13.3563 18.7188 13.0688 18.4312C12.7812 18.1438 12.425 18 12 18C11.575 18 11.2188 18.1438 10.9313 18.4312C10.6438 18.7188 10.5 19.075 10.5 19.5C10.5 19.925 10.6438 20.2812 10.9313 20.5687C11.2188 20.8562 11.575 21 12 21Z"
+                        fill="#5A596B" />
+                    </svg>
+                  </div>
+                  <div class="do-first__content">
+                    <h3 class="do-first__title lead font-weight-700">
+                      Check for alerts
+                    </h3>
+                    <p>
+                      <a href="https://www.listoscalifornia.org/alerts/"
+                        >Emergency alerts</a
+                      >
+                      will tell you how to stay safe. If you have a disability
+                      or access needs, evacuate early—getting help takes time.
+                    </p>
+                  </div>
+                </li>
+                <hr />
+
+                <li class="do-first__item">
+                  <div class="do-first__icon">
+                    <!-- shelter svg -->
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="33"
+                      viewBox="0 0 24 27"
+                      class="width-25"
+                      fill="none">
+                      <path
+                        d="M12 0L0 9V27H24V9L12 0ZM8.625 14.25C9.66 14.25 10.5 15.09 10.5 16.125C10.5 17.16 9.66 18 8.625 18C7.59 18 6.75 17.16 6.75 16.125C6.75 15.09 7.59 14.25 8.625 14.25ZM19.5 22.5H18V20.25H6V22.5H4.5V12H6V18.75H11.25V13.5H16.5C18.15 13.5 19.5 14.85 19.5 16.5V22.5Z"
+                        fill="#5A596B" />
+                    </svg>
+                  </div>
+                  <div class="do-first__content">
+                    <h3 class="do-first__title lead font-weight-700">
+                      Seek shelter
+                    </h3>
+                    <p>
+                      Call 211 and check news reports for emergency shelters in
+                      your area.
+                    </p>
+                  </div>
+                </li>
+                <hr />
+
+                <li class="do-first__item">
+                  <div class="do-first__icon">
+                    <!-- food svg -->
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="33"
+                      viewBox="0 0 24 27"
+                      class="width-25"
+                      fill="none">
+                      <path
+                        d="M12 0L0 9V27H24V9L12 0ZM12.75 14.25C12.75 15.495 11.745 16.5 10.5 16.5V22.5H9V16.5C7.755 16.5 6.75 15.495 6.75 14.25V9.75H8.25V14.25H9V9.75H10.5V14.25H11.25V9.75H12.75V14.25ZM16.5 22.5H15V17.25H13.5V12.75C13.5 11.1 14.85 9.75 16.5 9.75V22.5Z"
+                        fill="#5A596B" />
+                    </svg>
+                  </div>
+                  <div class="do-first__content">
+                    <h3 class="do-first__title lead font-weight-700">
+                      Find food
+                    </h3>
+                    <p>
+                      Look for an emergency shelter or local
+                      <a href="https://cdss.ca.gov/food-banks">food bank</a>.
+                    </p>
+                  </div>
+                </li>
+                <hr />
+
+                <li class="do-first__item">
+                  <div class="do-first__icon">
+                    <!-- disaster relief svg -->
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      class="width-25"
+                      fill="none">
+                      <path
+                        d="M0 21V3H24V21H0ZM9 14C9.83333 14 10.5417 13.7083 11.125 13.125C11.7083 12.5417 12 11.8333 12 11C12 10.1667 11.7083 9.45833 11.125 8.875C10.5417 8.29167 9.83333 8 9 8C8.16667 8 7.45833 8.29167 6.875 8.875C6.29167 9.45833 6 10.1667 6 11C6 11.8333 6.29167 12.5417 6.875 13.125C7.45833 13.7083 8.16667 14 9 14ZM2.1 19H15.9C15.2 17.75 14.2333 16.7708 13 16.0625C11.7667 15.3542 10.4333 15 9 15C7.56667 15 6.23333 15.3542 5 16.0625C3.76667 16.7708 2.8 17.75 2.1 19ZM17.25 12H18.75V10.3L20.225 11.15L20.975 9.85L19.5 9L20.975 8.15L20.225 6.85L18.75 7.7V6H17.25V7.7L15.775 6.85L15.025 8.15L16.5 9L15.025 9.85L15.775 11.15L17.25 10.3V12Z"
+                        fill="#5A596B" />
+                    </svg>
+                  </div>
+                  <div class="do-first__content">
+                    <h3 class="do-first__title lead font-weight-700">
+                      Contact a disaster relief service
+                    </h3>
+                    <p>
+                      Call 211, or contact your local emergency services or the
+                      <a
+                        href="https://www.redcross.org/find-your-local-chapter.html"
+                        >Red Cross</a
+                      >. In a state of emergency, your area may get a disaster
+                      center. This center can help you with all the steps on
+                      this page.
+                    </p>
+                  </div>
+                </li>
+                <hr />
+
+                <li class="do-first__item">
+                  <div class="do-first__icon">
+                    <!-- re-enter area svg -->
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="30"
+                      height="30"
+                      viewBox="0 0 24 24"
+                      class="width-25"
+                      fill="none">
+                      <g clip-path="url(#clip0_277_5556)">
+                        <path
+                          d="M16.1809 24L11.5666 19.325L13.0956 17.7575L16.1809 20.865L22.3788 14.65L23.9078 16.2175L16.1809 24ZM4.24915 21.8V11.4875L2.28328 13L1 11.2675L12.9863 2L25 11.24L23.6894 13L22.0785 11.79L16.1809 17.7575L13.0956 14.65L8.42662 19.38L10.802 21.8H4.24915Z"
+                          fill="#5A596B" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_277_5556">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div class="do-first__content">
+                    <h3 class="do-first__title lead font-weight-700">
+                      Find out if your area is safe to re-enter
+                    </h3>
+                    <p>
+                      Local officials should announce when you can return to
+                      your area.
+                    </p>
+                  </div>
+                </li>
+                <hr />
+
+                <li class="do-first__item">
+                  <div class="do-first__icon">
+                    <!-- utilities svg -->
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="30"
+                      viewBox="0 0 16 24"
+                      class="width-25"
+                      fill="none">
+                      <path
+                        d="M4.66667 24V20L0 15.3333V5.33333H2.66667V0H5.33333V5.33333H10.6667V0H13.3333V5.33333H16V15.3333L11.3333 20V24H4.66667Z"
+                        fill="#5A596B" />
+                    </svg>
+                  </div>
+                  <div class="do-first__content">
+                    <h3 class="do-first__title lead font-weight-700">
+                      Ask about your utilities
+                    </h3>
+                    <p>
+                      Local officials should tell you when it’s safe to turn on
+                      your water, gas, and electricity. If the fire department
+                      has them shut off, it’s unsafe to turn them on yourself.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="get-help " aria-labelledby="get-help-heading">
+      <div class="bg-band-help py-5">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 id="get-help-heading" class="mt-0">Get help now</h2>
+
+            <div
+              class="bg-white pos-rel h-100 p-4 mb-4 rounded-20 transition-0_3 transform-scale-1_05--hover">
+              <h3 class="lead font-weight-700 mt-0 mb-4 m ps-2">
+                <a class="link-before no-underline" href="/help/families"
+                  >Help for you or your family</a
+                >
+              </h3>
+              <p class="ps-2 mb-0">
+                Get help with food, shelter, financial assistance, rebuilding,
+                and more.
+              </p>
+            </div>
+
+            <div
+              class="bg-white pos-rel h-100 p-4 mb-4 rounded-20 transition-0_3 transform-scale-1_05--hover">
+              <h3 class="lead font-weight-700 mt-0 mb-4 m ps-2">
+                <a class="link-before no-underline" href="/help/business"
+                  >Help for your business</a
+                >
+              </h3>
+              <p class="ps-2 mb-0">
+                Find support and assistance for local business recovery.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deadlines" aria-labelledby="deadlines-heading">
+      <div class="deadlines__bg py-5 mt-5">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 id="deadlines-heading" class="mt-0">Upcoming deadlines</h2>
+
+            <div class="row g-4">
+              <div class="col-lg-6">
+                <div
+                  class="bg-white pos-rel h-100 px-4 py-4 rounded-20 transition-0_3 transform-scale-1_05--hover">
+                  <div class="d-flex align-items-top gap-2">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      class="width-30"
+                      aria-hidden="true"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M4.5 30.5238C3.675 30.5238 2.96875 30.2347 2.38125 29.6565C1.79375 29.0784 1.5 28.3833 1.5 27.5714V6.90476C1.5 6.09286 1.79375 5.39782 2.38125 4.81964C2.96875 4.24147 3.675 3.95238 4.5 3.95238H6V2.47619C6 2.05794 6.14375 1.70734 6.43125 1.4244C6.71875 1.14147 7.075 1 7.5 1C7.925 1 8.28125 1.14147 8.56875 1.4244C8.85625 1.70734 9 2.05794 9 2.47619V3.95238H21V2.47619C21 2.05794 21.1438 1.70734 21.4312 1.4244C21.7188 1.14147 22.075 1 22.5 1C22.925 1 23.2812 1.14147 23.5687 1.4244C23.8562 1.70734 24 2.05794 24 2.47619V3.95238H25.5C26.325 3.95238 27.0312 4.24147 27.6187 4.81964C28.2062 5.39782 28.5 6.09286 28.5 6.90476V13.806C28.5 14.2242 28.3562 14.5748 28.0687 14.8577C27.7812 15.1407 27.425 15.2821 27 15.2821C26.575 15.2821 26.2188 15.1407 25.9312 14.8577C25.6437 14.5748 25.5 14.2242 25.5 13.806V12.8095H4.5V27.5714H13.2C13.625 27.5714 13.9812 27.7129 14.2687 27.9958C14.5562 28.2788 14.7 28.6294 14.7 29.0476C14.7 29.4659 14.5562 29.8165 14.2687 30.0994C13.9812 30.3823 13.625 30.5238 13.2 30.5238H4.5ZM24 32C21.925 32 20.1562 31.2804 18.6937 29.8411C17.2312 28.4018 16.5 26.6611 16.5 24.619C16.5 22.577 17.2312 20.8363 18.6937 19.397C20.1562 17.9577 21.925 17.2381 24 17.2381C26.075 17.2381 27.8438 17.9577 29.3062 19.397C30.7687 20.8363 31.5 22.577 31.5 24.619C31.5 26.6611 30.7687 28.4018 29.3062 29.8411C27.8438 31.2804 26.075 32 24 32ZM24.75 24.3238V20.9286C24.75 20.7317 24.675 20.5595 24.525 20.4119C24.375 20.2643 24.2 20.1905 24 20.1905C23.8 20.1905 23.625 20.2643 23.475 20.4119C23.325 20.5595 23.25 20.7317 23.25 20.9286V24.2869C23.25 24.4837 23.2875 24.6744 23.3625 24.8589C23.4375 25.0435 23.55 25.2095 23.7 25.3571L25.9875 27.6083C26.1375 27.756 26.3125 27.8298 26.5125 27.8298C26.7125 27.8298 26.8875 27.756 27.0375 27.6083C27.1875 27.4607 27.2625 27.2885 27.2625 27.0917C27.2625 26.8948 27.1875 26.7226 27.0375 26.575L24.75 24.3238Z"
+                        fill="#5A596B" />
+                    </svg>
+                    <div class="ps-1">
+                      <time datetime="2027-11-29" class="font-weight-700"
+                        >November 29, 2027</time
+                      >
+                      <h3 class="lead font-weight-700 mt-2 mb-0">
+                        <a
+                          class="link-before no-underline"
+                          href="/deadlines/debris-removal-opt-out"
+                          >Opt out of debris removal</a
+                        >
+                      </h3>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="col-12 col-lg-5 p-l-lg mt-3 mt-lg-0 hero__image">
-                <figure class="m-0">
-                  <img
-                    src="images/riverside.png"
-                    alt="Map highlighting Riverside and San Bernardino counties in Southern California"
-                    loading="lazy"
-                    decoding="async" />
-                </figure>
+              <div class="col-lg-6">
+                <div
+                  class="bg-white pos-rel h-100 px-4 py-4 rounded-20 transition-0_3 transform-scale-1_05--hover">
+                  <div class="d-flex align-items-top gap-2">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      class="width-30"
+                      aria-hidden="true"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M4.5 30.5238C3.675 30.5238 2.96875 30.2347 2.38125 29.6565C1.79375 29.0784 1.5 28.3833 1.5 27.5714V6.90476C1.5 6.09286 1.79375 5.39782 2.38125 4.81964C2.96875 4.24147 3.675 3.95238 4.5 3.95238H6V2.47619C6 2.05794 6.14375 1.70734 6.43125 1.4244C6.71875 1.14147 7.075 1 7.5 1C7.925 1 8.28125 1.14147 8.56875 1.4244C8.85625 1.70734 9 2.05794 9 2.47619V3.95238H21V2.47619C21 2.05794 21.1438 1.70734 21.4312 1.4244C21.7188 1.14147 22.075 1 22.5 1C22.925 1 23.2812 1.14147 23.5687 1.4244C23.8562 1.70734 24 2.05794 24 2.47619V3.95238H25.5C26.325 3.95238 27.0312 4.24147 27.6187 4.81964C28.2062 5.39782 28.5 6.09286 28.5 6.90476V13.806C28.5 14.2242 28.3562 14.5748 28.0687 14.8577C27.7812 15.1407 27.425 15.2821 27 15.2821C26.575 15.2821 26.2188 15.1407 25.9312 14.8577C25.6437 14.5748 25.5 14.2242 25.5 13.806V12.8095H4.5V27.5714H13.2C13.625 27.5714 13.9812 27.7129 14.2687 27.9958C14.5562 28.2788 14.7 28.6294 14.7 29.0476C14.7 29.4659 14.5562 29.8165 14.2687 30.0994C13.9812 30.3823 13.625 30.5238 13.2 30.5238H4.5ZM24 32C21.925 32 20.1562 31.2804 18.6937 29.8411C17.2312 28.4018 16.5 26.6611 16.5 24.619C16.5 22.577 17.2312 20.8363 18.6937 19.397C20.1562 17.9577 21.925 17.2381 24 17.2381C26.075 17.2381 27.8438 17.9577 29.3062 19.397C30.7687 20.8363 31.5 22.577 31.5 24.619C31.5 26.6611 30.7687 28.4018 29.3062 29.8411C27.8438 31.2804 26.075 32 24 32ZM24.75 24.3238V20.9286C24.75 20.7317 24.675 20.5595 24.525 20.4119C24.375 20.2643 24.2 20.1905 24 20.1905C23.8 20.1905 23.625 20.2643 23.475 20.4119C23.325 20.5595 23.25 20.7317 23.25 20.9286V24.2869C23.25 24.4837 23.2875 24.6744 23.3625 24.8589C23.4375 25.0435 23.55 25.2095 23.7 25.3571L25.9875 27.6083C26.1375 27.756 26.3125 27.8298 26.5125 27.8298C26.7125 27.8298 26.8875 27.756 27.0375 27.6083C27.1875 27.4607 27.2625 27.2885 27.2625 27.0917C27.2625 26.8948 27.1875 26.7226 27.0375 26.575L24.75 24.3238Z"
+                        fill="#5A596B" />
+                    </svg>
+                    <div class="ps-1">
+                      <time datetime="2027-12-31" class="font-weight-700"
+                        >December 31, 2027</time
+                      >
+                      <h3 class="lead font-weight-700 mt-2 mb-0">
+                        <a
+                          class="link-before no-underline"
+                          href="/deadlines/fema-aid-application"
+                          >Apply for FEMA aid</a
+                        >
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div
+                  class="bg-white pos-rel h-100 px-4 py-4 rounded-20 transition-0_3 transform-scale-1_05--hover">
+                  <div class="d-flex align-items-top gap-2">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      class="width-30"
+                      aria-hidden="true"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M4.5 30.5238C3.675 30.5238 2.96875 30.2347 2.38125 29.6565C1.79375 29.0784 1.5 28.3833 1.5 27.5714V6.90476C1.5 6.09286 1.79375 5.39782 2.38125 4.81964C2.96875 4.24147 3.675 3.95238 4.5 3.95238H6V2.47619C6 2.05794 6.14375 1.70734 6.43125 1.4244C6.71875 1.14147 7.075 1 7.5 1C7.925 1 8.28125 1.14147 8.56875 1.4244C8.85625 1.70734 9 2.05794 9 2.47619V3.95238H21V2.47619C21 2.05794 21.1438 1.70734 21.4312 1.4244C21.7188 1.14147 22.075 1 22.5 1C22.925 1 23.2812 1.14147 23.5687 1.4244C23.8562 1.70734 24 2.05794 24 2.47619V3.95238H25.5C26.325 3.95238 27.0312 4.24147 27.6187 4.81964C28.2062 5.39782 28.5 6.09286 28.5 6.90476V13.806C28.5 14.2242 28.3562 14.5748 28.0687 14.8577C27.7812 15.1407 27.425 15.2821 27 15.2821C26.575 15.2821 26.2188 15.1407 25.9312 14.8577C25.6437 14.5748 25.5 14.2242 25.5 13.806V12.8095H4.5V27.5714H13.2C13.625 27.5714 13.9812 27.7129 14.2687 27.9958C14.5562 28.2788 14.7 28.6294 14.7 29.0476C14.7 29.4659 14.5562 29.8165 14.2687 30.0994C13.9812 30.3823 13.625 30.5238 13.2 30.5238H4.5ZM24 32C21.925 32 20.1562 31.2804 18.6937 29.8411C17.2312 28.4018 16.5 26.6611 16.5 24.619C16.5 22.577 17.2312 20.8363 18.6937 19.397C20.1562 17.9577 21.925 17.2381 24 17.2381C26.075 17.2381 27.8438 17.9577 29.3062 19.397C30.7687 20.8363 31.5 22.577 31.5 24.619C31.5 26.6611 30.7687 28.4018 29.3062 29.8411C27.8438 31.2804 26.075 32 24 32ZM24.75 24.3238V20.9286C24.75 20.7317 24.675 20.5595 24.525 20.4119C24.375 20.2643 24.2 20.1905 24 20.1905C23.8 20.1905 23.625 20.2643 23.475 20.4119C23.325 20.5595 23.25 20.7317 23.25 20.9286V24.2869C23.25 24.4837 23.2875 24.6744 23.3625 24.8589C23.4375 25.0435 23.55 25.2095 23.7 25.3571L25.9875 27.6083C26.1375 27.756 26.3125 27.8298 26.5125 27.8298C26.7125 27.8298 26.8875 27.756 27.0375 27.6083C27.1875 27.4607 27.2625 27.2885 27.2625 27.0917C27.2625 26.8948 27.1875 26.7226 27.0375 26.575L24.75 24.3238Z"
+                        fill="#5A596B" />
+                    </svg>
+                    <div class="ps-1">
+                      <time datetime="2030-05-31" class="font-weight-700"
+                        >May 31, 2030</time
+                      >
+                      <h3 class="lead font-weight-700 mt-2 mb-0">
+                        <a
+                          class="link-before no-underline"
+                          href="/deadlines/sba-loan-application"
+                          >Apply for an SBA loan</a
+                        >
+                      </h3>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <section class="top-needs" aria-labelledby="top-needs-heading">
-          <div class="container">
-            <h2 id="top-needs-heading" class="top-needs__title">Top needs</h2>
-            <nav class="top-needs__nav" aria-label="Top needs">
-              <a class="top-needs__item" href="/food-shelter"
-                >Get food &amp; shelter</a
-              >
-              <a class="top-needs__item" href="/real-time-info"
-                >See real-time info</a
-              >
-              <a class="top-needs__item" href="/disaster-centers"
-                >Find a disaster center</a
-              >
-            </nav>
-          </div>
-        </section>
+    <section class="updates-contribute" aria-labelledby="updates-heading">
+      <div class="container py-5">
+        <div class="col-lg-10 mx-auto pb-5">
+          <div class="row">
+            <div class="col-lg-6">
+              <h2 id="updates-heading">State updates</h2>
 
-        <section class="do-first" aria-labelledby="do-first-heading">
-          <div class="container">
-            <h2 id="do-first-heading" class="do-first__title">Do this first</h2>
-            <p class="do-first__lede">
-              Wildfires, earthquakes, floods—every disaster is different. Here
-              are suggestions for what to do first.
-            </p>
-
-            <div class="do-first__card" role="list">
-              <div class="do-first__item" role="listitem">
-                <span class="do-first__icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    fill="currentColor">
-                    <path
-                      d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2Zm6-6V11a6 6 0 1 0-12 0v5L4 17v2h16v-2l-2-1Z"></path>
-                  </svg>
-                </span>
-                <div class="do-first__content">
-                  <h3>Check for alerts</h3>
-                  <p>
-                    Emergency alerts will tell you how to stay safe. If you have
-                    a disability or access needs, evacuate early -- getting help
-                    takes time.
-                  </p>
-                </div>
-              </div>
-
-              <div class="do-first__item" role="listitem">
-                <span class="do-first__icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    fill="currentColor">
-                    <path d="M12 3 2 10h2v10h6v-6h4v6h6V10h2L12 3Z"></path>
-                  </svg>
-                </span>
-                <div class="do-first__content">
-                  <h3>Seek shelter</h3>
-                  <p>
-                    Call 211 and check news reports for emergency shelters in
-                    your area.
-                  </p>
-                </div>
-              </div>
-
-              <div class="do-first__item" role="listitem">
-                <span class="do-first__icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    fill="currentColor">
-                    <path
-                      d="M7 2a1 1 0 0 1 1 1v6a2 2 0 0 1-2 2H5v9H3V2h2v5h1V3a1 1 0 0 1 1-1Zm11 9h-3V3a1 1 0 1 1 2 0v5h1V3a1 1 0 1 1 2 0v8Zm-3 2h3v9h-3v-9Z"></path>
-                  </svg>
-                </span>
-                <div class="do-first__content">
-                  <h3>Find food</h3>
-                  <p>Look for an emergency shelter or local food bank.</p>
-                </div>
-              </div>
-
-              <div class="do-first__item" role="listitem">
-                <span class="do-first__icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    fill="currentColor">
-                    <path
-                      d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2Zm6.4 6.4-3 3a4 4 0 0 1-4.8 0l-3-3a8 8 0 0 1 10.8 0ZM4.6 6.4l3 3a4 4 0 0 1 0 4.8l-3 3a8 8 0 0 1 0-10.8Zm14.8 11.2-3-3a4 4 0 0 1 0-4.8l3-3a8 8 0 0 1 0 10.8Z"></path>
-                  </svg>
-                </span>
-                <div class="do-first__content">
-                  <h3>Contact a disaster relief service</h3>
-                  <p>
-                    Call 211, or contact your local emergency services or the
-                    Red Cross. In a state of emergency, your area may get a
-                    disaster center. This center can help you with all your
-                    recovery needs.
-                  </p>
-                </div>
-              </div>
-
-              <div class="do-first__item" role="listitem">
-                <span class="do-first__icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    fill="currentColor">
-                    <path
-                      d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5l-8-3Zm-1 13-3-3 1.4-1.4L11 11.2l3.6-3.6L16 9l-5 6Z"></path>
-                  </svg>
-                </span>
-                <div class="do-first__content">
-                  <h3>Find out if your area is safe to re-enter</h3>
-                  <p>
-                    Local officials should announce when you can return to your
-                    area.
-                  </p>
-                </div>
-              </div>
-
-              <div class="do-first__item" role="listitem">
-                <span class="do-first__icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="20"
-                    height="20"
-                    fill="currentColor">
-                    <path
-                      d="M7 2h2v6H7V2Zm8 0h2v6h-2V2ZM6 10h12v3a6 6 0 1 1-12 0v-3Z"></path>
-                  </svg>
-                </span>
-                <div class="do-first__content">
-                  <h3>Ask about your utilities</h3>
-                  <p>
-                    Local officials should tell you when it’s safe to turn on
-                    your water, gas, and electricity. If the fire department has
-                    them shut off, it’s unsafe to turn them on yourself.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="get-help" aria-labelledby="get-help-heading">
-          <div class="get-help__bg">
-            <div class="container">
-              <h2 id="get-help-heading" class="get-help__title">
-                Get help now
-              </h2>
-              <div class="get-help__list">
-                <a class="get-help__card" href="/help/families">
-                  <h3 class="get-help__card-title">
-                    Help for you or your family
-                  </h3>
-                  <p class="get-help__card-desc">
-                    Get help with food, shelter, financial assistance,
-                    rebuilding, and more.
-                  </p>
+              <h3 class="mt-0 font-size-regular font-weight-400">
+                <a href="/news/mlk-day-service">
+                  On MLK Day of Service, Governor Newsom and First Partner
+                  Siebel Newsom volunteer to help Los Angeles wildfire survivors
+                  January 16, 2025
                 </a>
+              </h3>
+              <p class="mb-4">January 16, 2025</p>
 
-                <a class="get-help__card" href="/help/business">
-                  <h3 class="get-help__card-title">Help for your business</h3>
-                  <p class="get-help__card-desc">
-                    Find support and assistance for local business recovery.
-                  </p>
+              <hr class="m-y-md border-4" />
+              <h3 class="font-size-regular font-weight-400">
+                <a href="/news/helping-impacted-regions">
+                  California continues to help individuals in regions impacted
+                  by Los Angeles fires access health care, food and water, and
+                  shelter January 16, 2025
                 </a>
-              </div>
+              </h3>
+              <p class="mb-4">January 16, 2025</p>
+
+              <hr class="m-y-md border-4" />
+              <h3 class="font-size-regular font-weight-400">
+                <a href="/news/governor-actions">
+                  Here’s all the actions Governor Newsom has taken in response
+                  to the Los Angeles fires January 16, 2025
+                </a>
+              </h3>
+              <p class="mb-4">January 16, 2025</p>
+
+              <hr class="m-y-md border-4" />
+              <h3 class="font-size-regular font-weight-400">
+                <a href="/news">View all 2026 Multi-county fires news</a>
+              </h3>
+            </div>
+            <div class="col-lg-6">
+              <h2>Contribute</h2>
+
+              <p>
+                <a href="https://engaged.ca.gov/">Join the conversation</a>
+                at Engaged California
+              </p>
+
+              <hr class="m-y-md border-4" />
+              <p><a href="/donate">Donate money</a> to people affected</p>
+              <hr class="m-y-md border-4" />
+              <p>
+                <a href="/volunteer">Volunteer your time</a>
+              </p>
             </div>
           </div>
-        </section>
-
-        <section class="deadlines" aria-labelledby="deadlines-heading">
-          <div class="deadlines__bg">
-            <div class="container">
-              <h2 id="deadlines-heading" class="deadlines__title">
-                Upcoming deadlines
-              </h2>
-
-              <ul class="deadlines__grid" role="list">
-                <li class="deadlines__card">
-                  <div class="deadlines__meta">
-                    <span class="deadlines__icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="20"
-                        height="20"
-                        fill="currentColor">
-                        <path
-                          d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 6H4v12h16V8Z"></path>
-                      </svg>
-                    </span>
-                    <time datetime="2027-11-29" class="deadlines__date"
-                      >November 29, 2027</time
-                    >
-                  </div>
-                  <a
-                    class="deadlines__link"
-                    href="/deadlines/debris-removal-opt-out"
-                    >Opt out of debris removal</a
-                  >
-                </li>
-
-                <li class="deadlines__card">
-                  <div class="deadlines__meta">
-                    <span class="deadlines__icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="20"
-                        height="20"
-                        fill="currentColor">
-                        <path
-                          d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 6H4v12h16V8Z"></path>
-                      </svg>
-                    </span>
-                    <time datetime="2027-12-31" class="deadlines__date"
-                      >December 31, 2027</time
-                    >
-                  </div>
-                  <a class="deadlines__link" href="/deadlines/fema-aid"
-                    >Apply for FEMA aid</a
-                  >
-                </li>
-
-                <li class="deadlines__card">
-                  <div class="deadlines__meta">
-                    <span class="deadlines__icon" aria-hidden="true">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="20"
-                        height="20"
-                        fill="currentColor">
-                        <path
-                          d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2Zm13 6H4v12h16V8Z"></path>
-                      </svg>
-                    </span>
-                    <time datetime="2030-05-23" class="deadlines__date"
-                      >May 23, 2030</time
-                    >
-                  </div>
-                  <a class="deadlines__link" href="/deadlines/sba-loan"
-                    >Apply for an SBA loan</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="updates-contribute" aria-labelledby="updates-heading">
-          <div class="container updates-contribute__grid">
-            <div>
-              <h2 id="updates-heading" class="uc__title">State updates</h2>
-              <ul class="uc__news" role="list">
-                <li class="uc__news-item">
-                  <a class="uc__news-link" href="/news/mlk-day-service">
-                    On MLK Day of Service, Governor Newsom and First Partner
-                    Siebel Newsom volunteer to help Los Angeles wildfire
-                    survivors January 16, 2025
-                  </a>
-                  <div class="uc__news-date">January 16, 2025</div>
-                </li>
-
-                <li class="uc__news-item">
-                  <a
-                    class="uc__news-link"
-                    href="/news/helping-impacted-regions">
-                    California continues to help individuals in regions impacted
-                    by Los Angeles fires access health care, food and water, and
-                    shelter January 16, 2025
-                  </a>
-                  <div class="uc__news-date">January 16, 2025</div>
-                </li>
-
-                <li class="uc__news-item">
-                  <a class="uc__news-link" href="/news/governor-actions">
-                    Here’s all the actions Governor Newsom has taken in response
-                    to the Los Angeles fires January 16, 2025
-                  </a>
-                  <div class="uc__news-date">January 16, 2025</div>
-                </li>
-
-                <li class="uc__news-item uc__news-item--cta">
-                  <a class="uc__news-link" href="/news"
-                    >View all 2026 Multi-county fires news</a
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 class="uc__title">Contribute</h2>
-              <nav class="uc__contrib" aria-label="Contribute">
-                <a class="uc__contrib-link" href="https://engaged.ca.gov/"
-                  >Join the conversation at Engaged California</a
-                >
-                <a class="uc__contrib-link" href="/donate"
-                  >Donate money to people affected</a
-                >
-                <a class="uc__contrib-link" href="/volunteer"
-                  >Volunteer your time</a
-                >
-              </nav>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  </body>
-</html>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

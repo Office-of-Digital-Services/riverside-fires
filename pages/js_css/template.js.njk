@@ -5,7 +5,6 @@ eleventyExcludeFromCollections: true
 ---
 
 {%- set code -%}
-{%- include "../../node_modules/@cagovweb/state-template/dist/js/cagov.core.min.js" ignore missing -%}
 {%- include "../../src/js/cagov-header-full.html.js" ignore missing -%}
 {%- endset -%}
 {{- code | safe -}}
