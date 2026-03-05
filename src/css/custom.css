@@ -8,607 +8,218 @@
   --divider: #e6e7ea;
   --panel: #ffffff;
   --icon-bg: #eef0f3;
-
+  --riverside-gray: #f5f3f7; /* light gray for Riverside banner background */
+  --riverside-gray-2: #fafafa; /* light gray for Riverside banner background */
   --band-help: #eef4f1; /* pale green for Get help now */
   --band-deadlines: #f3f1f6; /* lilac for deadlines */
+  --color-accent-bg: #fff3e0;
+  --color-gray-border: #d4d4d7;
+  --color-gray-dark: #6d6d6d;
+  --color-text-secondary: #3b3b44;
+  --color-band-help: #eef4f1;
+
+  /* Recovery card background tokens */
+  --color-safety: #f0f4f0;
+  --color-food-shelter: #fdf2e9;
+  --color-health: #f0f6fa;
+  --color-documents: #f5f3f7;
+  --color-financial: #faf7f2;
+  --disaster-icon-fill: #5a596b;
 }
 
-body {
-  overflow-x: hidden;
+.riverside-gray {
+  background-color: var(--riverside-gray);
+  @media (width >= 992px) {
+    border-right: 12px solid #fff;
+  }
+}
+
+.riverside-gray-2 {
+  background-color: var(--riverside-gray-2);
+  @media (width >= 992px) {
+    border-left: 12px solid #fff;
+  }
+}
+
+.bg-band-help {
+  background-color: var(--band-help);
+}
+
+.width-25 {
+  width: 25px !important;
+}
+
+.font-size-regular {
+  font-size: calc(1.125rem + 0.1vw) !important;
+}
+
+.banner-container {
+  background: linear-gradient(
+    to bottom,
+    var(--riverside-gray) 0%,
+    var(--riverside-gray-2) 100%
+  );
+
+  @media (width >= 992px) {
+    background: linear-gradient(
+      to right,
+      var(--riverside-gray) 0 50%,
+      var(--riverside-gray-2) 50% 100%
+    );
+  }
 }
 
 /* --------------------------------------------------
    Shared helpers
 -------------------------------------------------- */
 
-/* container spacing (shared) */
-.container {
-  margin-inline: auto;
-  padding-inline: 20px;
-}
-
-/* section-specific max widths */
-.top-needs .container,
-.get-help .container,
-.deadlines .container,
-.updates-contribute .container {
-  max-width: 1100px;
-}
-.do-first .container {
-  max-width: 900px;
-}
-
-/* icon base (specific sizes come later) */
-.do-first__icon,
-.deadlines__icon {
-  display: inline-grid;
-  place-items: center;
-  background: var(--icon-bg);
-  color: #6a6f78;
-  flex: 0 0 auto;
-}
-
-/* underline style shared by multiple links */
-.top-needs__item:hover,
-.get-help__card-title,
-.deadlines__link,
-.uc__news-link,
-.uc__contrib-link {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* shared hover “lift” for cards */
-.get-help__card:hover,
-.deadlines__card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(20, 23, 28, 0.08);
-}
-
 /* --------------------------------------------------
    Top needs
 -------------------------------------------------- */
-.top-needs {
-  background: #fff;
-  padding: clamp(24px, 4vw, 56px) 0;
-}
 
-.top-needs__title {
-  color: var(--ink);
-  font-weight: 700;
-  font-size: clamp(28px, 3vw, 40px);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin-block-end: 24px;
-}
-
-.top-needs__nav {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  gap: 32px;
-}
-
-.top-needs__item {
-  position: relative;
-  flex: 1 1 0;
-  display: flex;
-  align-items: center;
-  padding: 18px 0;
-  font-weight: 700;
-  font-size: clamp(18px, 1.8vw, 22px);
-  line-height: 1.3;
-  text-decoration: none;
-  color: var(--brand);
-  text-decoration: none !important;
-}
-
-.top-needs__item:not(:first-child)::before {
-  content: "";
-  position: absolute;
-  left: -16px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--divider);
-}
-
-@media (max-width: 700px) {
-  .top-needs__nav {
-    flex-direction: column;
-    gap: 0;
-  }
-  .top-needs__item {
-    padding: 16px 0;
-  }
-  .top-needs__item:not(:first-child)::before {
-    left: 0;
-    right: 0;
-    top: -1px;
-    bottom: auto;
-    height: 2px;
-    width: 100%;
+.brd {
+  border-top: 4px solid #d4d4d7;
+  @media (min-width: 992px) {
+    border-top: 0;
+    border-left: 4px solid #d4d4d7;
   }
 }
 
-/* --------------------------------------------------
-   Do this first
--------------------------------------------------- */
+/* ---------- Do this first (card layout) ---------- */
 .do-first {
-  padding: clamp(16px, 3.5vw, 40px) 0 0;
-}
-
-.do-first__title {
-  margin: 0 0 8px 0;
-  font-weight: 700;
-  font-size: clamp(22px, 2.6vw, 2.3125rem);
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  padding-bottom: 1rem;
+  padding: 2rem 0;
 }
 
 .do-first__lede {
-  margin: 0 0 16px 0;
-  /* color: var(--muted); */
-  line-height: 1.6;
-  max-width: 65ch;
+  margin: 0 0 1.25rem;
+  color: var(--color-muted);
 }
 
-.do-first__card {
-  background: #f6f7f9;
-  border-radius: 16px;
-  padding: 6px;
-  box-shadow: 0 1px 0 rgba(20, 23, 28, 0.03);
+.do-first__list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-
 .do-first__item {
   display: grid;
-  grid-template-columns: 36px 1fr;
-  gap: 14px;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1rem;
   align-items: start;
-  padding: 2.25rem 2rem;
-  position: relative;
+  background: var(--color-panel);
+  border: 1px solid var(--color-divider);
+  border-radius: 0.75rem;
 }
-
-.do-first__item + .do-first__item {
-  border-top: 2px solid var(--divider);
-}
-
-/* icon size for this section */
 .do-first__icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-}
-
-.do-first__content h3 {
-  margin: 2px 0 6px 0;
-  font-size: clamp(16px, 2.1vw, 1.4375rem);
-  line-height: 1.35;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.do-first__content p {
-  margin: 0;
-  line-height: 1.6;
-  color: #3e4650;
-}
-
-.do-first__content a {
-  color: var(--brand);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-@media (max-width: 600px) {
-  .do-first__item {
-    grid-template-columns: 32px 1fr;
-    padding: 16px 14px;
-  }
-  .do-first__icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-  }
-}
-
-/* --------------------------------------------------
-   Get help now
--------------------------------------------------- */
-.get-help {
-  margin-top: clamp(24px, 4vw, 40px);
-}
-
-.get-help__bg {
-  background: var(--band-help);
-  padding: clamp(20px, 4vw, 36px) 0 clamp(28px, 5vw, 48px);
-}
-
-.get-help__title {
-  margin: 0 0 clamp(12px, 2.5vw, 20px) 0;
-  color: var(--ink);
-  font-weight: 700;
-  font-size: clamp(24px, 3vw, 36px);
-  letter-spacing: -0.01em;
-}
-
-.get-help__list {
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
   display: grid;
-  gap: clamp(14px, 2vw, 22px);
+  place-items: center;
+  background: transparent;
+  border-radius: 0.5rem;
 }
-
-/* shared card base */
-.get-help__card,
-.deadlines__card {
-  background: var(--panel);
-  border-radius: 20px;
-  box-shadow: 0 1px 0 rgba(20, 23, 28, 0.03);
-  transition:
-    transform 0.06s ease,
-    box-shadow 0.06s ease;
-}
-
-/* section-specific padding/border that differ */
-.get-help__card {
-  display: block;
-  padding: clamp(18px, 2.8vw, 26px);
-  text-decoration: none;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.get-help__card-title {
-  margin: 0 0 8px 0;
-  font-size: clamp(18px, 2.2vw, 22px);
-  line-height: 1.3;
-  font-weight: 800;
-  color: var(--brand);
-}
-
-.get-help__card-desc {
+.do-first__title {
   margin: 0;
-  color: var(--muted);
+  line-height: 1.3;
+}
+.do-first__content p {
+  margin: 0.25rem 0 0;
+}
+
+@media (min-width: 768px) {
+  .do-first__list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1100px) {
+  .do-first__list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* ---------- Do this first (stacked variant) ---------- */
+.do-first.do-first--stack {
+  background: transparent;
+  padding: 0;
+}
+.do-first.do-first--stack .container {
+  padding: 1rem 0 2rem 0.75rem;
+  background: #f9f9fa;
+  border-radius: 1.25rem;
+}
+.do-first.do-first--stack h2 {
+  margin-block: 0 1rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+.do-first.do-first--stack .do-first__lede {
+  margin-block: 0 1rem;
+}
+
+.do-first.do-first--stack .do-first__list {
+  display: block;
+}
+.do-first.do-first--stack .do-first__item {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  column-gap: 1rem;
+  align-items: start;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 1rem;
+
+  @media (width >= 992px) {
+    padding: 3rem 2rem 3rem 1rem;
+  }
+}
+
+.do-first.do-first--stack hr {
+  border: 0;
+  border-top: 4px solid var(--color-gray-dark);
+  margin-left: calc(3.5rem + 2rem);
+  width: calc(100% - (5.5rem + 2rem));
+  margin-block: 0;
+
+  @media (width >= 992px) {
+    margin-left: calc(3.5rem + 1rem);
+    width: calc(100% - (5.5rem + 1rem));
+  }
+}
+
+.do-first.do-first--stack .do-first__icon {
+  inline-size: 2.475rem;
+  block-size: 2.475rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  position: relative;
+  top: 2px;
+}
+.do-first.do-first--stack .do-first__title {
+  margin: 0 0 0.5rem;
+  color: var(--color-ink);
+}
+.do-first.do-first--stack .do-first__content {
+  padding-top: 0.15rem;
+}
+.do-first.do-first--stack .do-first__content p {
+  margin: 0;
+  padding-right: 0.5rem;
   line-height: 1.6;
-  max-width: 80ch;
+  color: var(--color-text-secondary);
 }
 
 /* --------------------------------------------------
    Deadlines
 -------------------------------------------------- */
-.deadlines {
-  margin-top: clamp(24px, 4vw, 48px);
-}
 
 .deadlines__bg {
   background: var(--band-deadlines);
-  padding: clamp(24px, 4vw, 48px) 0;
-}
-
-.deadlines__title {
-  margin: 0 0 clamp(16px, 3vw, 24px) 0;
-  color: var(--ink);
-  font-weight: 800;
-  font-size: clamp(26px, 3.2vw, 40px);
-  letter-spacing: -0.01em;
-}
-
-.deadlines__grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: clamp(14px, 2.2vw, 22px);
-}
-
-@media (min-width: 900px) {
-  .deadlines__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.deadlines__card {
-  padding: clamp(16px, 2.6vw, 22px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.deadlines__meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-/* icon size for this section */
-.deadlines__icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-}
-
-.deadlines__date {
-  font-weight: 800;
-  color: var(--muted);
-  font-size: clamp(14px, 1.8vw, 16px);
-}
-
-.deadlines__link {
-  display: inline-block;
-  font-weight: 800;
-  font-size: clamp(18px, 2.2vw, 22px);
-  color: var(--brand);
 }
 
 /* --------------------------------------------------
    Updates + Contribute
 -------------------------------------------------- */
-.updates-contribute {
-  padding: clamp(20px, 4vw, 40px) 0;
-}
-
-.updates-contribute__grid {
-  display: grid;
-  gap: clamp(24px, 3vw, 56px);
-}
-@media (min-width: 900px) {
-  .updates-contribute__grid {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
-.uc__title {
-  margin: 0 0 16px 0;
-  font-weight: 800;
-  font-size: clamp(24px, 3vw, 40px);
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
-
-/* list reset for news */
-.uс__news,
-.uc__news {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.uc__news-item {
-  padding: 18px 0 20px;
-  border-bottom: 3px solid var(--divider);
-}
-.uc__news-item--cta {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.uc__news-link {
-  display: inline-block;
-  color: var(--brand);
-  font-weight: 700;
-  line-height: 1.55;
-  font-size: clamp(16px, 2vw, 18px);
-}
-.uc__news-date {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.uc__contrib {
-  display: grid;
-  gap: 18px;
-}
-.uc__contrib-link {
-  display: block;
-  padding: 14px 0;
-  color: var(--brand);
-  font-weight: 700;
-  border-bottom: 3px solid var(--divider);
-}
-.uc__contrib-link:last-child {
-  border-bottom: 3px solid var(--divider);
-}
-.uc__news-link:hover,
-.uc__contrib-link:hover {
-  text-decoration-thickness: 2px;
-}
-
-/* --------------------------------------------------
-   HERO (single, tidy block)
-   - Mobile: stacked, centered text, full-bleed image (wrapper spans 100vw)
-   - Tablet (≥768px): side-by-side 50/50, equal heights
-   - Desktop (≥992px): ~62/38 split, vertically centered text
--------------------------------------------------- */
-
-/* Base (mobile-first) */
-.hero-disaster .row {
-  display: grid !important;
-  grid-template-columns: 1fr; /* stacked */
-  gap: 16px;
-}
-
-/* Neutralize Bootstrap columns inside hero */
-.hero-disaster .row > [class*="col-"] {
-  width: auto !important;
-  max-width: none !important;
-  flex: none !important;
-  min-width: 0;
-}
-
-/* Text panel base */
-.hero-disaster .hero__copy {
-  background: #f3f0f6;
-  border-radius: 12px;
-  padding: clamp(1rem, 3vw, 2rem);
-}
-
-/* Image side base: fill track, clip rounding */
-.hero-disaster .hero__image,
-.hero-disaster .hero__image figure,
-.hero-disaster .hero__image picture {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-.hero-disaster .hero__image {
-  border-radius: 12px;
-  overflow: hidden;
-}
-.hero-disaster .hero__image > * {
-  grid-area: 1 / 1;
-}
-.hero-disaster .hero__image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-}
-
-/* Tablet+: side-by-side, equal heights */
-@media (min-width: 768px) {
-  .hero-disaster .row {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* 50/50 */
-    gap: 24px;
-    align-items: stretch;
-  }
-  .hero-disaster .p-r-lg {
-    padding-right: 0 !important;
-  }
-  .hero-disaster .p-l-lg {
-    padding-left: 0 !important;
-  }
-  .hero-disaster .hero__image img {
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-/* Desktop+: ~62/38 split, vertically centered text */
-@media (min-width: 992px) {
-  .hero-disaster .row {
-    grid-template-columns: 1.62fr 1fr;
-  }
-  .hero-disaster .hero__copy {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(24px, 3.5vw, 48px);
-  }
-  .hero-disaster .hero__image img {
-    object-position: center right;
-  }
-}
-
-/* Mobile refined: centered text + full-bleed wrapper + (optional) white divider */
-@media (max-width: 700px) {
-  .hero-disaster .row {
-    gap: 0;
-  } /* divider controls separation */
-
-  .hero-disaster .hero__copy {
-    text-align: center;
-    padding: clamp(20px, 6vw, 28px) clamp(16px, 5vw, 22px);
-    border-radius: 12px 12px 0 0;
-    background: #f3f0f6;
-  }
-  .hero-disaster h1 {
-    font-size: clamp(34px, 9vw, 48px);
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    margin: 0 0 10px;
-  }
-  .hero-disaster .lead {
-    font-size: clamp(18px, 4.8vw, 22px);
-    line-height: 1.45;
-    margin: 0 auto;
-    max-width: 32ch;
-  }
-
-  /* strip wrapper chrome and make wrapper span viewport */
-  .hero-disaster .hero__image,
-  .hero-disaster .hero__image figure,
-  .hero-disaster .hero__image picture,
-  .hero-disaster #county-image-output,
-  .hero-disaster #county-image-output > *,
-  .hero-disaster #county-map {
-    background: transparent !important;
-    border: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-  }
-
-  .hero-disaster .hero__image {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%; /* true full-bleed */
-    border-radius: 0;
-    overflow: visible;
-  }
-
-  /* Divider currently disabled (height: 0) to match your latest look */
-  .hero-disaster .hero__image::before {
-    content: "";
-    display: block;
-    height: 0; /* set 10–14px to show a white strip */
-    background: #fff;
-    width: 100%;
-  }
-
-  .hero-disaster .hero__image img {
-    width: 100%;
-    height: clamp(230px, 48vh, 420px);
-    object-fit: cover;
-    object-position: center right;
-    max-width: none;
-    margin: 0;
-    border-radius: 0;
-    transform: translateZ(0.001px); /* avoids faint 1px edges */
-  }
-}
-
-@media (max-width: 700px) {
-  .hero-disaster .hero__image {
-    left: auto;
-    transform: none;
-    width: 100%;
-    overflow: hidden; /* optional: prevents subpixel bleed */
-  }
-}
-
-.btn-askca {
-  display: inline-block;
-  background: #046b99;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 1.5rem;
-  text-decoration: none !important;
-  font-weight: 600;
-  text-align: center;
-  max-width: 20%;
-}
-
-.btn-askca:hover,
-.btn-askca:focus {
-  background: #084298;
-  color: #fff;
-  text-decoration: none !important;
-}
-.call-to-action {
-  font-weight: bold;
-  padding-top: 1rem;
-  font-size: 1.4375rem;
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .get-help__card,
-  .deadlines__card {
-    transition: none;
-  }
-}
