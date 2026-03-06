@@ -345,6 +345,8 @@ div.cagov-header-full {
 
       /* Search styles */
       > details.cagov-header-full__3-search-button {
+        height: 2.5rem;
+
         > summary {
           cursor: pointer;
           display: inline-flex;
