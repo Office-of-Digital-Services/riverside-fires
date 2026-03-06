@@ -29,16 +29,10 @@
 
 .riverside-gray {
   background-color: var(--riverside-gray);
-  @media (width >= 992px) {
-    border-right: 12px solid #fff;
-  }
 }
 
 .riverside-gray-2 {
   background-color: var(--riverside-gray-2);
-  @media (width >= 992px) {
-    border-left: 12px solid #fff;
-  }
 }
 
 .bg-band-help {
