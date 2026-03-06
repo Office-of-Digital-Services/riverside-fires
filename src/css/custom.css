@@ -29,10 +29,41 @@
 
 .riverside-gray {
   background-color: var(--riverside-gray);
+  @media (width >= 992px) {
+    border-right: 12px solid #fff;
+  }
 }
 
 .riverside-gray-2 {
   background-color: var(--riverside-gray-2);
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 0;
+    outline: 16px solid #fff;
+    pointer-events: none;
+
+    @media (width >= 992px) {
+      display: none;
+    }
+  }
+
+  &::before {
+    left: -50%;
+  }
+
+  &::after {
+    right: -50%;
+  }
+
+  @media (width >= 992px) {
+    border-left: 12px solid #fff;
+  }
 }
 
 .bg-band-help {
