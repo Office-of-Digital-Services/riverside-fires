@@ -243,8 +243,6 @@ div.cagov-header-full {
 
   /* bottom bar/branding styles */
   > div.cagov-header-full__1-bottom-bar {
-    border-bottom: 2px solid #e2e2e3;
-
     > div.cagov-header-full__2-branding {
       display: flex;
       justify-content: flex-start;
