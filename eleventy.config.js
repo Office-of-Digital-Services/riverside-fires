@@ -1,15 +1,17 @@
 //@ts-check
-import { minify } from "terser";
-import postcss from "postcss";
-import PurgeCSS from "@fullhuman/postcss-purgecss";
+const { minify } = require("terser");
+const { PurgeCSS } = require("purgecss");
 
 /**
  * @typedef {import("./node_modules/@11ty/eleventy/src/defaultConfig.js").defaultConfig} EleventyDefaultConfig
  * @typedef {import("@11ty/eleventy/UserConfig").default} EleventyConfig
  */
 
-export default async function (/** @type {EleventyConfig} **/ eleventyConfig) {
-  const domain = "https://www.celebrate.ca.gov";
+module.exports = async function (
+  /** @type {EleventyConfig} **/ eleventyConfig
+) {
+  const domain =
+    "https://as-cdt-ods-webserv-riverside-fires-p-001-b7f7d5a2hngha3hz.westus-01.azurewebsites.net/";
 
   eleventyConfig.addGlobalData("layout", "base-layout");
 
@@ -36,27 +38,34 @@ export default async function (/** @type {EleventyConfig} **/ eleventyConfig) {
   // PurgeCSS filter to extract only used CSS
   eleventyConfig.addFilter(
     "purgeCSS",
-    async (
+    async function purgeCSS(
       /** @type {string} */ css,
-      contentPaths = [
-        "./pages/**/*.html",
-        "./src/css/**/*.css",
-        "./src/js/**/*.mjs",
-        "./src/_includes/**/*.html",
-        "./node_modules/@cagovweb/state-template/dist/js/cagov.core.min.js"
-      ]
-    ) => {
-      const result = await postcss([
-        // @ts-ignore
-        PurgeCSS({
-          content: contentPaths,
-          safelist: [":focus", /focus/, "focus-visible", "focus-within"],
-          defaultExtractor: (/** @type {string} */ content) =>
-            content.match(/[\w-/:]+(?<!:)/g) || []
-        })
-      ]).process(css, { from: undefined });
-      // Minify the purged CSS
-      return minifyCSS(result.css);
+      /** @type {string} */ html
+    ) {
+      const purge = await new PurgeCSS().purge({
+        content: [
+          {
+            raw: "<html><body>" + html + "</body></html>",
+            extension: "html"
+          }
+        ],
+        css: [
+          {
+            raw: css
+          }
+        ],
+        safelist: [
+          ":focus",
+          ":hover",
+          /focus/,
+          "focus-visible",
+          "focus-within",
+          ":first-child",
+          ":last-child"
+        ],
+        defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+      });
+      return purge[0].css;
     }
   );
 
@@ -95,6 +104,21 @@ export default async function (/** @type {EleventyConfig} **/ eleventyConfig) {
     }
   );
 
+  /**
+   * Wraps content in a specified HTML tag with optional attributes.
+   */
+  eleventyConfig.addFilter(
+    "wrapTag",
+    function (
+      /** @type {string} */ content,
+      /** @type {string} */ tagName,
+      /** @type {string} */ attributes = ""
+    ) {
+      const attrs = attributes.trim() ? " " + attributes.trim() : "";
+      return `<${tagName}${attrs}>${content}</${tagName}>`;
+    }
+  );
+
   //Start with default config, easier to configure 11ty later
   /** @type {EleventyDefaultConfig} */
   const config = {
@@ -110,4 +134,4 @@ export default async function (/** @type {EleventyConfig} **/ eleventyConfig) {
   };
 
   return config;
-}
+};

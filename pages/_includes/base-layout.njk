@@ -61,27 +61,6 @@
       type="font/woff2"
       crossorigin />
 
-     <style>
-      {%- set css -%}
-      {%- include "../../node_modules/@cagovweb/state-template/dist/css/cagov.core.css" -%}
-            {%- include "../../src/css/custom.css" -%}
-      {%- endset -%}
-      {{- css | purgeCSS | safe -}}
-
-      {%- set css -%}
-      {%- include "../../src/css/fonts.css" -%}
-
-      {%- include "../../src/css/cagov-header-full.html.css" -%}
-      {%- include "../../src/css/cagov-footer.html.css" -%}
-      {%- endset -%}
-      {{- css | cssmin | safe -}}
-    </style>
-
-
-    <!-- SCRIPTS-->
-    <script src="/js/template.js?vFeb" defer></script>
-    <script src="/js/translate.js?vFeb" defer></script>
-
     <!-- BEGIN Google Analytics -->
 
     <!-- END Google Analytics -->
@@ -91,7 +70,14 @@
       src="https://alert.cdt.ca.gov"
       crossorigin="anonymous"></script>
   </head>
+      <!-- Stylesheet -->
+    {% set purgeCssHtml %} {% include 'header.html' %} {{ content | safe }} {%
+    include 'footer.html' %} {% endset -%} {{ cssBundle | purgeCSS(purgeCssHtml)
+    | cssmin | wrapTag('style') | safe }}
+    <!-- Custom Script -->
+    {% set script -%} {%- include "../../src/js/cagov-header-full.html.js"-%} {%- include "../../src/js/googletranslate.mjs"-%}
+    {%- endset %} {{ script | jsmin | wrapTag('script') | safe }}
   <body>
-    {% include 'header.html' %} {{ content | safe }} {% include 'footer.html' %}
+       {{ purgeCssHtml | safe }}
   </body>
 </html>
