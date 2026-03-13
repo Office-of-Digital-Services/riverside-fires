@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* cagov shell styles */
 div.cagov-header-full {
   box-sizing: border-box;
@@ -66,12 +74,15 @@ div.cagov-header-full {
       @media (width >= 576px) {
         max-width: 540px;
       }
+
       @media (width >= 768px) {
         max-width: 720px;
       }
+
       @media (width >= 992px) {
         max-width: 960px;
       }
+
       @media (width >= 1200px) {
         max-width: 1176px;
       }
@@ -243,6 +254,8 @@ div.cagov-header-full {
 
   /* bottom bar/branding styles */
   > div.cagov-header-full__1-bottom-bar {
+    border-bottom: 2px solid #e2e2e3;
+
     > div.cagov-header-full__2-branding {
       display: flex;
       justify-content: flex-start;
