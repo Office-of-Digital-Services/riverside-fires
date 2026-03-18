@@ -1,6 +1,8 @@
 //@ts-check
 const { minify } = require("terser");
 const { PurgeCSS } = require("purgecss");
+const postcss = require("postcss");
+const postcssNested = require("postcss-nested");
 
 /**
  * @typedef {import("./node_modules/@11ty/eleventy/src/defaultConfig.js").defaultConfig} EleventyDefaultConfig
@@ -69,6 +71,19 @@ module.exports = async function (
     }
   );
 
+  // For making a non-nested fallback and replacing custom media queries
+  eleventyConfig.addFilter("flattenCSS", async (/** @type {string} */ code) => {
+    // Replace "@media (width >=" with "@media (min-width:"
+    const replaced = code.replace(
+      /@media\s*\(width\s*>=/g,
+      "@media (min-width:"
+    );
+    const result = await postcss([postcssNested]).process(replaced, {
+      from: undefined
+    });
+    return result.css;
+  });
+
   eleventyConfig.addNunjucksAsyncFilter(
     "cssmin",
     /**
@@ -114,8 +129,22 @@ module.exports = async function (
       /** @type {string} */ tagName,
       /** @type {string} */ attributes = ""
     ) {
-      const attrs = attributes.trim() ? " " + attributes.trim() : "";
+      let attrs = attributes.trim() ? " " + attributes.trim() : "";
+      attrs += ' id="custom-inline-styles"';
       return `<${tagName}${attrs}>${content}</${tagName}>`;
+    }
+  );
+
+  eleventyConfig.addNunjucksAsyncFilter(
+    "jsmin",
+    /**
+     *
+     * @param {string} code
+     * @param {(arg0: null, arg1: string) => void} callback
+     */
+    async (code, callback) => {
+      const minified = await minify(code);
+      callback(null, minified.code || "");
     }
   );
 
