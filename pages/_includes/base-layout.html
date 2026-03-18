@@ -61,14 +61,19 @@
       type="font/woff2"
       crossorigin />
 
+    <!--
+       * Applies a Safari-specific polyfill to prevent flickering issues.
+       * This workaround addresses rendering problems unique to Safari browsers.
+       -->
+    <style>
+      html > body {
+         visibility: hidden;
+       }
+    </style>
 
-
-
-      <script src="/js/custom.min.js"></script>
+    <script src="/js/custom.min.js"></script>
 
     <!-- BEGIN Google Analytics -->
-
-
 
     <!-- END Google Analytics -->
     <!-- Statewide Alerts Server -->
@@ -76,14 +81,12 @@
       defer
       src="https://alert.cdt.ca.gov"
       crossorigin="anonymous"></script>
-
-  
   </head>
-     {% set purgeCssHtml %} {% include 'header.html' %} {{ content | safe }} {%
-    include 'footer.html' %} {% endset -%} {{ cssBundle | purgeCSS(purgeCssHtml)
-    | cssmin | wrapTag('style') | safe }}
+  {% set purgeCssHtml %} {% include 'header.html' %} {{ content | safe }} {%
+  include 'footer.html' %} {% endset -%} {{ cssBundle | purgeCSS(purgeCssHtml) |
+  cssmin | wrapTag('style') | safe }}
 
   <body>
-       {{ purgeCssHtml | safe }}
+    {{ purgeCssHtml | safe }}
   </body>
 </html>

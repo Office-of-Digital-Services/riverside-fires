@@ -258,3 +258,9 @@ div.cagov-header-full__1-bottom-bar {
 /* --------------------------------------------------
    Updates + Contribute
 -------------------------------------------------- */
+
+html {
+  > body {
+    visibility: visible;
+  }
+}
