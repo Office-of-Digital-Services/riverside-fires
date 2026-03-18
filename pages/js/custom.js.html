@@ -1,0 +1,8 @@
+---
+layout: null
+permalink: "js/custom.min.js"
+eleventyExcludeFromCollections: true
+---
+
+{%- set js -%} {%- include "../../src/js/polyfills.js"-%} {%- include
+"../../src/js/googletranslate.mjs"-%} {%- endset -%} {{- js | jsmin | safe -}}
