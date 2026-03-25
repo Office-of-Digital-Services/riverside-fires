@@ -3,6 +3,13 @@ title: Riverside Fires Recovery test page
 description: A test page for the Riverside Fires recovery site, showcasing the new design and content structure
 ---
 
+<script src="https://www.google.com/recaptcha/api.js" defer></script>
+<script>
+  // const serviceUrl = "https://api.template.webstandards.ca.gov/api/air-table";
+  const serviceUrl = "https://as-cdt-ods-webserv-riverside-fires-p-001-b7f7d5a2hngha3hz.westus-01.azurewebsites.net//";
+
+  const siteKey = "6Ld_Q5gsAAAAAPQxbJxSIq9sNhA3QZtm2XwRGxeQ"; // Set this to your recaptch site key
+</script>
 <div id="main-content" class="main-content">
   <main>
     <div class="banner-container">
@@ -413,6 +420,12 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
                   type="submit"
                   value="Submit"
                   class="btn btn-primary btn-lg rounded-pill px-4 mt-4 mb-0 w-100 width-sm-auto" />
+
+                <button
+                  class="g-recaptcha hidden"
+                  data-sitekey=""
+                  data-callback="recaptchaCallback"
+                  data-action="submit"></button>
               </form>
             </div>
           </div>
@@ -591,126 +604,120 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
 </div>
 
 <div class="modal fade" id="modalResponse" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="h4 modal-title">Problem with submission.</h3>
-        <button
-          type="button"
-          class="close btn btn-secondary"
-          data-bs-dismiss="modal">
-          <span class="sr-only">Close modal</span>
-          <span class="ca-gov-icon-close-mark" aria-hidden="true"></span>
-        </button>
-      </div>
-      <div class="modal-body">
-        There was a problem with your submission. Please wait a moment and try
-        again.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-bs-dismiss="modal">
-          Close
-        </button>
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="h4 modal-title">Problem with submission.</h3>
+                <button
+                  type="button"
+                  class="close btn btn-secondary"
+                  data-bs-dismiss="modal">
+                  <span class="sr-only">Close modal</span>
+                  <span
+                    class="ca-gov-icon-close-mark"
+                    aria-hidden="true"></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                There was a problem with your submission. Please wait a moment
+                and try again.
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-default"
+                  data-bs-dismiss="modal">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<button
-  type="button"
-  id="btnModal"
-  class="hidden"
-  data-bs-toggle="modal"
-  data-bs-target="#modalResponse"></button>
-<a
-  href="contact-us-thankyou.html"
-  id="urlThankyou"
-  class="hidden"
-  rel="noindex"></a>
+    <button
+      type="button"
+      id="btnModal"
+      class="hidden"
+      data-bs-toggle="modal"
+      data-bs-target="#modalResponse"></button>
+    <a href="/success/" id="urlThankyou" class="hidden" rel="noindex"></a>
 
-<script>
-  const serviceUrl = "https://api.template.webstandards.ca.gov/api/air-table";
+    <script>
+      document.querySelector("button.g-recaptcha").dataset.sitekey = siteKey;
 
-  (()=>{
-   //This code runs first
-   getForm().addEventListener("submit", submitForm);
-   getSubmitButton().addEventListener("click", () =>
-    getForm().setAttribute("submit_attempted", "")
-   );
-  })
-  ();
+      window.addEventListener("load", () => {
 
-  function getForm() {
-   return /** @type {HTMLFormElement} */ (
-    document.getElementById("ContactUsForm")
-   );
-  }
+        getForm().addEventListener("submit", submitForm);
+        getSubmitButton().addEventListener("click", () =>
+          getForm().setAttribute("submit_attempted", "")
+        );
+      });
 
-  function getSubmitButton() {
-   return /** @type { HTMLButtonElement } */ (
-    getForm().querySelector("input[type=submit]")
-   );
-  }
 
-  function goToThanksPage() {
-   document.getElementById("urlThankyou").click();
-  }
 
-  function openModal() {
-   document.getElementById("btnModal").click();
-  }
+      function getForm() {
+        return /** @type {HTMLFormElement} */ (
+          document.getElementById("ContactUsForm")
+        );
+      }
 
-  function triggerRecaptcha() {
-   document.querySelector(".g-recaptcha").click(); //will trigger recaptchaCallback when complete
-  }
+      function getSubmitButton() {
+        return /** @type { HTMLButtonElement } */ (
+          getForm().querySelector("input[type=submit]")
+        );
+      }
 
-  async function submitForm(/** @type { SubmitEvent } */ e) {
-   e.preventDefault();
+      function goToThanksPage() {
+        document.getElementById("urlThankyou").click();
+      }
 
-   getSubmitButton().disabled = true;
-   setTimeout(() => (getSubmitButton().disabled = false), 5000);
+      function openModal() {
+        document.getElementById("btnModal").click();
+      }
 
-   triggerRecaptcha();
-  }
+      function triggerRecaptcha() {
+        document.querySelector(".g-recaptcha").click(); //will trigger recaptchaCallback when complete
+      }
 
-  function recaptchaCallback(/** @type { string } */ g_recaptcha_response) {
-   const postBody = {
-    captcha: { "g-recaptcha-response": g_recaptcha_response },
-    fields: {},
-   };
+      async function submitForm(/** @type { SubmitEvent } */ e) {
+        e.preventDefault();
 
-   for (const pair of new FormData(getForm())) {
-    postBody.fields[pair[0]] = pair[1];
-   }
+        getSubmitButton().disabled = true;
+        setTimeout(() => (getSubmitButton().disabled = false), 5000);
 
-   delete postBody.fields["g-recaptcha-response"]; //we already have it from the callback
+        triggerRecaptcha();
+      }
 
-   /** @type { RequestInit } */
-   const request = {
-    method: "POST",
-    headers: {
-     "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postBody),
-   };
+      function recaptchaCallback() {
+        /** @type { RequestInit } */
+        const request = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([...new FormData(getForm())]),
+        };
 
-   fetch(serviceUrl, request)
-    .then((response) => {
-     if (response.ok) {
-      return response.json();
-     }
+        fetch(serviceUrl, request)
+          .then(async response => {
+            if (response.ok) {
+              return;
+            }
 
-     throw new Error(
-      `Can't submit - ${response.status}:${response.statusText}`
-     );
-    })
-    .then((responseJson) => {
+            console.error(await response.json());
 
-     goToThanksPage();
-    })
-    .catch((error) => {
-     console.error(error);
+            throw new Error(
+              `Can't submit - ${response.status}:${response.statusText}`
+            );
+          })
+          .then(responseJson => {
+            goToThanksPage();
+          })
+          .catch(error => {
+            console.error(error);
 
-     openModal();
-    });
-  }
-</script>
+            openModal();
+          });
+      }
+    </script>
