@@ -604,120 +604,113 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
 </div>
 
 <div class="modal fade" id="modalResponse" role="dialog" tabindex="-1">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="h4 modal-title">Problem with submission.</h3>
-                <button
-                  type="button"
-                  class="close btn btn-secondary"
-                  data-bs-dismiss="modal">
-                  <span class="sr-only">Close modal</span>
-                  <span
-                    class="ca-gov-icon-close-mark"
-                    aria-hidden="true"></span>
-                </button>
-              </div>
-              <div class="modal-body">
-                There was a problem with your submission. Please wait a moment
-                and try again.
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  data-bs-dismiss="modal">
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="h4 modal-title">Problem with submission.</h3>
+        <button
+          type="button"
+          class="close btn btn-secondary"
+          data-bs-dismiss="modal">
+          <span class="sr-only">Close modal</span>
+          <span class="ca-gov-icon-close-mark" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        There was a problem with your submission. Please wait a moment and try
+        again.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
-    <button
-      type="button"
-      id="btnModal"
-      class="hidden"
-      data-bs-toggle="modal"
-      data-bs-target="#modalResponse"></button>
-    <a href="/success/" id="urlThankyou" class="hidden" rel="noindex"></a>
+  </div>
+</div>
+<button
+  type="button"
+  id="btnModal"
+  class="hidden"
+  data-bs-toggle="modal"
+  data-bs-target="#modalResponse"></button>
+<a href="/success/" id="urlThankyou" class="hidden" rel="noindex"></a>
 
-    <script>
-      document.querySelector("button.g-recaptcha").dataset.sitekey = siteKey;
+<script>
+  document.querySelector("button.g-recaptcha").dataset.sitekey = siteKey;
 
-      window.addEventListener("load", () => {
+  window.addEventListener("load", () => {
 
-        getForm().addEventListener("submit", submitForm);
-        getSubmitButton().addEventListener("click", () =>
-          getForm().setAttribute("submit_attempted", "")
+    getForm().addEventListener("submit", submitForm);
+    getSubmitButton().addEventListener("click", () =>
+      getForm().setAttribute("submit_attempted", "")
+    );
+  });
+
+
+
+  function getForm() {
+    return /** @type {HTMLFormElement} */ (
+      document.getElementById("ContactUsForm")
+    );
+  }
+
+  function getSubmitButton() {
+    return /** @type { HTMLButtonElement } */ (
+      getForm().querySelector("input[type=submit]")
+    );
+  }
+
+  function goToThanksPage() {
+    document.getElementById("urlThankyou").click();
+  }
+
+  function openModal() {
+    document.getElementById("btnModal").click();
+  }
+
+  function triggerRecaptcha() {
+    document.querySelector(".g-recaptcha").click(); //will trigger recaptchaCallback when complete
+  }
+
+  async function submitForm(/** @type { SubmitEvent } */ e) {
+    e.preventDefault();
+
+    getSubmitButton().disabled = true;
+    setTimeout(() => (getSubmitButton().disabled = false), 5000);
+
+    triggerRecaptcha();
+  }
+
+  function recaptchaCallback() {
+    /** @type { RequestInit } */
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([...new FormData(getForm())]),
+    };
+
+    fetch(serviceUrl, request)
+      .then(async response => {
+        if (response.ok) {
+          return;
+        }
+
+        console.error(await response.json());
+
+        throw new Error(
+          `Can't submit - ${response.status}:${response.statusText}`
         );
+      })
+      .then(responseJson => {
+        goToThanksPage();
+      })
+      .catch(error => {
+        console.error(error);
+
+        openModal();
       });
-
-
-
-      function getForm() {
-        return /** @type {HTMLFormElement} */ (
-          document.getElementById("ContactUsForm")
-        );
-      }
-
-      function getSubmitButton() {
-        return /** @type { HTMLButtonElement } */ (
-          getForm().querySelector("input[type=submit]")
-        );
-      }
-
-      function goToThanksPage() {
-        document.getElementById("urlThankyou").click();
-      }
-
-      function openModal() {
-        document.getElementById("btnModal").click();
-      }
-
-      function triggerRecaptcha() {
-        document.querySelector(".g-recaptcha").click(); //will trigger recaptchaCallback when complete
-      }
-
-      async function submitForm(/** @type { SubmitEvent } */ e) {
-        e.preventDefault();
-
-        getSubmitButton().disabled = true;
-        setTimeout(() => (getSubmitButton().disabled = false), 5000);
-
-        triggerRecaptcha();
-      }
-
-      function recaptchaCallback() {
-        /** @type { RequestInit } */
-        const request = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify([...new FormData(getForm())]),
-        };
-
-        fetch(serviceUrl, request)
-          .then(async response => {
-            if (response.ok) {
-              return;
-            }
-
-            console.error(await response.json());
-
-            throw new Error(
-              `Can't submit - ${response.status}:${response.statusText}`
-            );
-          })
-          .then(responseJson => {
-            goToThanksPage();
-          })
-          .catch(error => {
-            console.error(error);
-
-            openModal();
-          });
-      }
-    </script>
+  }
+</script>
