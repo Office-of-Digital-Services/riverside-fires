@@ -19,11 +19,12 @@
   --color-band-help: #eef4f1;
 
   /* Recovery card background tokens */
+  --color-super-light-gray: #f9f9fa;
   --color-safety: #f0f4f0;
   --color-food-shelter: #fdf2e9;
   --color-health: #f0f6fa;
   --color-documents: #f5f3f7;
-  --color-financial: #faf7f2;
+  --color-alert: #faf7f2;
   --disaster-icon-fill: #5a596b;
 }
 
@@ -68,6 +69,14 @@
 
 .bg-band-help {
   background-color: var(--band-help);
+}
+
+.bg-alert {
+  background-color: var(--color-alert);
+}
+
+.bg-super-light-gray {
+  background-color: var(--color-super-light-gray);
 }
 
 .width-25 {
@@ -263,4 +272,73 @@ html {
   > body {
     visibility: visible;
   }
+}
+
+/* --------------------------------------------------
+  Form
+-------------------------------------------------- */
+
+form:not(form[submit_attempted]) .form-control + .invalid-feedback,
+form:not(form[submit_attempted]) .alert,
+form:valid .alert,
+.form-control:valid + .invalid-feedback {
+  display: none !important;
+}
+
+/* new */
+
+.invalid-feedback {
+  position: relative;
+}
+
+.invalid-feedback::before {
+  content: "\ea2f";
+  position: absolute;
+  font-family: "CaGov";
+  font-size: 1.5rem;
+  right: 10px;
+  top: -51px;
+}
+
+form[submit_attempted] .alert {
+  border-left: 5px solid;
+}
+
+form[submit_attempted] .alert .container {
+  padding-top: 2px;
+}
+
+form[submit_attempted] .form-control:invalid {
+  border-bottom: 4px solid #cd402d;
+  position: relative;
+}
+
+.error-icon {
+  display: none;
+  float: right;
+  position: relative;
+  top: -2.7rem !important;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+form[submit_attempted] .form-control:invalid ~ .error-icon {
+  display: block;
+}
+
+.form-control[role="combobox"]::placeholder {
+  font-size: 1.1rem !important;
+}
+
+/* masking combobox carrot */
+.combobox::before {
+  content: "\33";
+  position: absolute;
+  font-family: "CaGov";
+  font-size: 1.4rem;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  right: 5px;
+  top: 8px;
 }
