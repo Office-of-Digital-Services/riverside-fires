@@ -3,13 +3,6 @@ title: Riverside Fires Recovery test page
 description: A test page for the Riverside Fires recovery site, showcasing the new design and content structure
 ---
 
-<script src="https://www.google.com/recaptcha/api.js" defer></script>
-<script>
-  // const serviceUrl = "https://api.template.webstandards.ca.gov/api/air-table";
-  const serviceUrl = "https://as-cdt-ods-webserv-riverside-fires-p-001-b7f7d5a2hngha3hz.westus-01.azurewebsites.net//";
-
-  const siteKey = "6Ld_Q5gsAAAAAPQxbJxSIq9sNhA3QZtm2XwRGxeQ"; // Set this to your recaptch site key
-</script>
 <div id="main-content" class="main-content">
   <main>
     <div class="banner-container">
@@ -380,11 +373,7 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
                 We’ll send you important updates, like upcoming aid deadlines.
                 This is not an alert system, or a fire status update.
               </p>
-              <form
-                autocomplete="on"
-                method="POST"
-                id="ContactUsForm"
-                role="form">
+              <form id="disater-recovery">
                 <div
                   class="alert alert-danger alert-banner brd-0 brd-red p-l m-t-md"
                   role="alert">
@@ -403,16 +392,15 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
                 </label>
                 <input
                   type="email"
-                  class="form-control rounded-5"
                   id="InputEmail"
+                  class="form-control rounded-5"
                   name="Email"
                   autocomplete="email"
-                  required=""
-                  aria-required="true"
+                  required
                   size="65"
                   maxlength="250"
-                  minlength="1"
-                  role="textbox" />
+                  minlength="1" />
+
                 <div class="mt-3 invalid-feedback font-weight-600 d-block">
                   Enter a valid email. Example: name@email.com
                 </div>
@@ -420,12 +408,6 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
                   type="submit"
                   value="Submit"
                   class="btn btn-primary btn-lg rounded-pill px-4 mt-4 mb-0 w-100 width-sm-auto" />
-
-                <button
-                  class="g-recaptcha hidden"
-                  data-sitekey=""
-                  data-callback="recaptchaCallback"
-                  data-action="submit"></button>
               </form>
             </div>
           </div>
@@ -636,22 +618,33 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
   data-bs-target="#modalResponse"></button>
 <a href="/success/" id="urlThankyou" class="hidden" rel="noindex"></a>
 
+<script src="https://www.google.com/recaptcha/api.js" defer></script>
 <script>
-  document.querySelector("button.g-recaptcha").dataset.sitekey = siteKey;
+  var recaptchaSiteKey = "6Ld_Q5gsAAAAAPQxbJxSIq9sNhA3QZtm2XwRGxeQ"; // Set this to your recaptcha site key
+  var serviceUrl = "https://fa-cdt-pub-migr-betaws-w-p-001-stage.azurewebsites.net/api/v2"; // Dev Form Post Service URL
+  //var serviceUrl = "http://localhost:12345/api/v2"; // Local Host Service URL
 
-  window.addEventListener("load", () => {
-
-    getForm().addEventListener("submit", submitForm);
-    getSubmitButton().addEventListener("click", () =>
-      getForm().setAttribute("submit_attempted", "")
-    );
+  /** @type { HTMLButtonElement } */
+  var recaptchaButton;
+  window.addEventListener("DOMContentLoaded", () => {
+    // Dynamically add the invisible reCAPTCHA v3 button to the form.
+    if (!recaptchaButton) {
+      recaptchaButton = document.createElement("button");
+      recaptchaButton.ariaHidden = "true";
+      recaptchaButton.type = "button";
+      recaptchaButton.hidden = true;
+      recaptchaButton.setAttribute("data-sitekey", recaptchaSiteKey);
+      recaptchaButton.setAttribute("data-callback", "recaptchaCallback");
+      recaptchaButton.setAttribute("data-action", "submit");
+      recaptchaButton.classList.add("g-recaptcha");
+      getForm().appendChild(recaptchaButton);
+      getForm().addEventListener("submit", submitForm);
+    }
   });
-
-
 
   function getForm() {
     return /** @type {HTMLFormElement} */ (
-      document.getElementById("ContactUsForm")
+      document.querySelector("#disater-recovery")
     );
   }
 
@@ -661,56 +654,38 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
     );
   }
 
-  function goToThanksPage() {
-    document.getElementById("urlThankyou").click();
-  }
-
-  function openModal() {
-    document.getElementById("btnModal").click();
-  }
-
-  function triggerRecaptcha() {
-    document.querySelector(".g-recaptcha").click(); //will trigger recaptchaCallback when complete
-  }
-
   async function submitForm(/** @type { SubmitEvent } */ e) {
     e.preventDefault();
 
     getSubmitButton().disabled = true;
     setTimeout(() => (getSubmitButton().disabled = false), 5000);
 
-    triggerRecaptcha();
+    // Trigger the invisible reCAPTCHA v3 flow.
+    // This will call recaptchaCallback() when complete.
+    recaptchaButton.click();
   }
-
   function recaptchaCallback() {
     /** @type { RequestInit } */
     const request = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify([...new FormData(getForm())]),
+      body: JSON.stringify([...new FormData(getForm())])
     };
 
     fetch(serviceUrl, request)
       .then(async response => {
         if (response.ok) {
-          return;
+            window.location.href = "/success/";
+            return;
         }
 
-        console.error(await response.json());
-
-        throw new Error(
-          `Can't submit - ${response.status}:${response.statusText}`
-        );
-      })
-      .then(responseJson => {
-        goToThanksPage();
+        throw new Error(await response.text());
       })
       .catch(error => {
         console.error(error);
-
-        openModal();
+        alert("Form submission failed. See console for details.");
       });
   }
 </script>
