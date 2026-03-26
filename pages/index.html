@@ -654,6 +654,10 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
     );
   }
 
+  function goToThanksPage() {
+    document.getElementById("urlThankyou").click();
+  }
+
   async function submitForm(/** @type { SubmitEvent } */ e) {
     e.preventDefault();
 
@@ -677,12 +681,16 @@ description: A test page for the Riverside Fires recovery site, showcasing the n
     fetch(serviceUrl, request)
       .then(async response => {
         if (response.ok) {
-            window.location.href = "/success/";
             return;
         }
 
         throw new Error(await response.text());
       })
+
+      .then(responseJson => {
+        goToThanksPage();
+      })
+
       .catch(error => {
         console.error(error);
         alert("Form submission failed. See console for details.");
