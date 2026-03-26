@@ -83,6 +83,10 @@
   width: 25px !important;
 }
 
+.rounded-24 {
+  border-radius: 24px !important;
+}
+
 @media (width >= 568px) {
   .width-sm-auto {
     width: auto !important;
