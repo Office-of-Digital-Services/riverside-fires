@@ -169,3 +169,5 @@ window.customElements.define("cagov-feedback", CAGovFeedback);
 const style = document.createElement("style");
 style.textContent = styles;
 document.querySelector("head").appendChild(style);
+
+export { CAGovFeedback };
