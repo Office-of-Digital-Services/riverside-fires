@@ -5,4 +5,5 @@ eleventyExcludeFromCollections: true
 ---
 
 {%- set js -%} {%- include "../../src/js/polyfills.js"-%} {%- include
-"../../src/js/googletranslate.mjs"-%} {%- endset -%} {{- js | jsmin | safe -}}
+"../../src/js/googletranslate.mjs"-%} {%- include "../../src/js/feedback.mjs"-%}
+{%- endset -%} {{- js | jsmin | safe -}}
