@@ -63,7 +63,10 @@ module.exports = async function (
           "focus-visible",
           "focus-within",
           ":first-child",
-          ":last-child"
+          ":last-child",
+          /cagov-feedback/,
+          /feedback-form/,
+          /cagov-feedback\s*>\s*section\s*>\s*div\.feedback-form/
         ],
         defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
       });

@@ -71,7 +71,7 @@
        }
     </style>
 
-    <script src="/js/custom.min.js"></script>
+    <script src="/js/custom.min.js" type="module"></script>
 
     <!-- BEGIN Google Analytics -->
 
@@ -83,8 +83,8 @@
       crossorigin="anonymous"></script>
   </head>
   {% set purgeCssHtml %} {% include 'header.html' %} {{ content | safe }} {%
-  include 'footer.html' %} {% endset -%} {{ cssBundle | purgeCSS(purgeCssHtml) |
-  cssmin | wrapTag('style') | safe }}
+  include 'feedback.html' %} {% include 'footer.html' %} {% endset -%} {{
+  cssBundle | purgeCSS(purgeCssHtml) | cssmin | wrapTag('style') | safe }}
 
   <body>
     {{ purgeCssHtml | safe }}
