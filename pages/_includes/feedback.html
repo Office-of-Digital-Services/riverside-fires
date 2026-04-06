@@ -1,9 +1,56 @@
-<!--Feedback-->
-<div class="section-understated d-print-none">
+<section aria-label="feedback" class="section-understated">
   <div class="container py-4 pb-5">
-    <cagov-feedback
-      data-endpoint-url="https://feedback.innovation.ca.gov/sendfeedback">
-    </cagov-feedback>
+    <div class="col-lg-6">
+      <form class="feedback-form cagov-stack">
+        <div class="js-feedback-form feedback-form-question">
+          <h2 class="feedback-form-label h3 mt-2" id="feedback-rating">
+            Did you find what you were looking for?
+          </h2>
+          <button
+            class="feedback-form-button js-feedback-yes feedback-yes btn btn-outline-primary btn-lg rounded py-3 me-3"
+            id="feedback-yes">
+            Yes
+          </button>
+          <button
+            class="feedback-form-button js-feedback-no btn btn-outline-primary btn-lg rounded py-3"
+            id="feedback-no">
+            No
+          </button>
+        </div>
+
+        <div
+          class="feedback-form-thanks js-feedback-thanks h4 mt-3 mb-3 d-none"
+          role="alert">
+          Thank you for your feedback!
+        </div>
+
+        <div class="feedback-form-add d-none">
+          <label
+            class="feedback-form-label js-feedback-field-label h4 mt-3 mb-3"
+            for="add-feedback"
+            >Great! What were you looking for today?</label
+          >
+          <div class="feedback-form-add-grid py-2">
+            <textarea
+              name="add-feedback"
+              class="js-add-feedback feedback-form-textarea w-100 p-2 height-150"
+              id="add-feedback"
+              rows="1"></textarea>
+            <button
+              class="feedback-form-button js-feedback-submit btn btn-outline-primary btn-lg rounded py-3 mt-2 d-block"
+              type="submit"
+              id="feedback-submit">
+              Submit
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="feedback-form-thanks feedback-thanks-add py-3 d-none"
+          role="alert">
+          Thank you for your comments!
+        </div>
+      </form>
+    </div>
   </div>
-  <!-- End Section Feedback  -->
-</div>
+</section>

@@ -81,6 +81,8 @@
       defer
       src="https://alert.cdt.ca.gov"
       crossorigin="anonymous"></script>
+
+    {% if subscribe %} {% include 'email-subscribtion.html' %} {% endif %}
   </head>
   {% set purgeCssHtml %} {% include 'header.html' %} {{ content | safe }} {%
   include 'feedback.html' %} {% include 'footer.html' %} {% endset -%} {{
