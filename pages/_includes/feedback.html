@@ -1,7 +1,12 @@
 <section aria-label="feedback" class="section-understated">
   <div class="container py-4 pb-5">
     <div class="col-lg-6">
-      <form class="feedback-form cagov-stack">
+      <form class="feedback-form cagov-stack" id="pageFeedback">
+        <input
+          type="button"
+          hidden=""
+          data-sitekey="6Ld_Q5gsAAAAAPQxbJxSIq9sNhA3QZtm2XwRGxeQ"
+          class="g-recaptcha" />
         <div class="js-feedback-form feedback-form-question">
           <h2 class="feedback-form-label h3 mt-2" id="feedback-rating">
             Did you find what you were looking for?
@@ -32,7 +37,7 @@
           >
           <div class="feedback-form-add-grid py-2">
             <textarea
-              name="add-feedback"
+              name="comments"
               class="js-add-feedback feedback-form-textarea w-100 p-2 height-150"
               id="add-feedback"
               rows="1"></textarea>

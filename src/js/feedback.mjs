@@ -29,15 +29,51 @@ class StaticFeedbackForm {
       e.preventDefault();
       // Always hide the feedback-form-add section
       this.addDiv.classList.add("d-none");
-      if (this.textarea.value.trim().length > 0) {
-        // Show thank you for comments
-        this.thanksAdd.classList.remove("d-none");
-        this.thanksGeneral.classList.add("d-none");
-      } else {
-        // Show general thank you
-        this.thanksGeneral.classList.remove("d-none");
-        this.thanksAdd.classList.add("d-none");
-      }
+      const redirectSuccessUrl = "/success";
+      const redirectErrorUrl = "/error/?error_message=";
+      const pageFeedbackPostServiceUrl =
+        "https://api.template.webstandards.ca.gov/api/v2/airtable/disasteremail/app0ZwBwEi5jWuOH6/tblgCoYklqnNmtHK8/";
+      this.submitBtn.disabled = true;
+
+      grecaptcha.execute().then(key => {
+        const recaptchaResponses = document.querySelectorAll(
+          "textarea[name='g-recaptcha-response']"
+        );
+        recaptchaResponses.forEach(textarea => {
+          textarea.value = key;
+        });
+
+        const request = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify([...new FormData(this.form)])
+        };
+        fetch(pageFeedbackPostServiceUrl, request)
+          .then(async response => {
+            if (response.ok) {
+              // Show thank you for comments if textarea has content, else show general thank you
+              if (this.textarea.value.trim().length > 0) {
+                this.thanksAdd.classList.remove("d-none");
+                this.thanksGeneral.classList.add("d-none");
+              } else {
+                this.thanksGeneral.classList.remove("d-none");
+                this.thanksAdd.classList.add("d-none");
+              }
+              window.location.href = redirectSuccessUrl;
+              return;
+            }
+            throw new Error(await response.text());
+          })
+          .catch(error => {
+            this.thanksAdd.classList.add("d-none");
+            this.thanksGeneral.classList.add("d-none");
+            window.location.href =
+              redirectErrorUrl + encodeURIComponent(error.message);
+          })
+          .finally(() => {
+            this.submitBtn.disabled = false;
+          });
+      });
     });
 
     // Handle click on Yes button

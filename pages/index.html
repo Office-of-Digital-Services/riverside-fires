@@ -374,7 +374,7 @@ subscribe: true
                 We’ll send you important updates, like upcoming aid deadlines.
                 This is not an alert system, or a fire status update.
               </p>
-              <form autocomplete="on" onsubmit="submitForm(event)">
+              <form autocomplete="on" id="emailSubscription">
                 <input
                   type="button"
                   hidden=""
@@ -590,3 +590,49 @@ subscribe: true
     </section>
   </main>
 </div>
+
+<script>
+
+  const emailSubscriptionPostServiceUrl = "https://api.template.webstandards.ca.gov/api/v2/airtable/disasteremail/app0ZwBwEi5jWuOH6/tblA8kVimcJUzOMoF/";
+
+  document.getElementById('emailSubscription').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+        const redirectSuccessUrl = "/success";
+        const redirectErrorUrl = "/error/?error_message=";
+
+        e.submitter.disabled = true; // disable submit button to prevent multiple clicks
+
+        grecaptcha.execute().then(() => {
+          // Callback that uses FETCH API to submit the form data to the form post service after successful reCAPTCHA validation.
+
+          /** @type { RequestInit } */
+          const request = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify([...new FormData(e.target)]) // Convert form data to JSON
+          };
+
+          fetch(emailSubscriptionPostServiceUrl, request)
+            .then(async response => {
+              if (response.ok) {
+                console.log("Form submitted successfully");
+                alert("Form submitted successfully");
+                window.location.href = redirectSuccessUrl;
+                return;
+              }
+
+              throw new Error(await response.text());
+            })
+            .catch(error => {
+              console.error(error);
+              alert("Form submission failed. See console for details.");
+              window.location.href = redirectErrorUrl + encodeURIComponent(error.message);
+            })
+            .finally(() => { e.submitter.disabled = false; });
+        });
+  }); // End of submitForm function
+</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
