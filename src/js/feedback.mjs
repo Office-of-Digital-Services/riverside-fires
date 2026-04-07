@@ -1,3 +1,16 @@
+
+// Helper to dynamically add reCAPTCHA script to head (module-level, not per-instance)
+function addRecaptchaScript() {
+  if (!document.getElementById('recaptcha-script')) {
+    const script = document.createElement('script');
+    script.id = 'recaptcha-script';
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+}
+
 class StaticFeedbackForm {
   constructor(form) {
     this.form = form;
@@ -79,6 +92,7 @@ class StaticFeedbackForm {
     // Handle click on Yes button
     this.yesBtn.addEventListener("click", e => {
       e.preventDefault();
+      addRecaptchaScript();
       // Hide the feedback question section
       const questionDiv = this.form.querySelector(".js-feedback-form");
       if (questionDiv) questionDiv.classList.add("d-none");
@@ -90,6 +104,7 @@ class StaticFeedbackForm {
     // Handle click on No button
     this.noBtn.addEventListener("click", e => {
       e.preventDefault();
+      addRecaptchaScript();
       // Hide the feedback question section
       const questionDiv = this.form.querySelector(".js-feedback-form");
       if (questionDiv) questionDiv.classList.add("d-none");
