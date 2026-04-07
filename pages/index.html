@@ -593,6 +593,26 @@ subscribe: true
 
 <script>
 
+  // Helper to dynamically add reCAPTCHA script to head
+  function addRecaptchaScript() {
+    if (!document.getElementById('recaptcha-script')) {
+      const script = document.createElement('script');
+      script.id = 'recaptcha-script';
+      script.src = 'https://www.google.com/recaptcha/api.js';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  }
+
+  // Add script on InputEmail focus
+  document.addEventListener('DOMContentLoaded', function() {
+    var emailInput = document.getElementById('InputEmail');
+    if (emailInput) {
+      emailInput.addEventListener('focus', addRecaptchaScript, { once: true });
+    }
+  });
+
   const emailSubscriptionPostServiceUrl = "https://api.template.webstandards.ca.gov/api/v2/airtable/disasteremail/app0ZwBwEi5jWuOH6/tblA8kVimcJUzOMoF/";
 
   document.getElementById('emailSubscription').addEventListener('submit', function(e) {
@@ -635,4 +655,3 @@ subscribe: true
         });
   }); // End of submitForm function
 </script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
