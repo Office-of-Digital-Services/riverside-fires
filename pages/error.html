@@ -1,0 +1,40 @@
+---
+title: Submission Error
+layout: base-layout
+header: sticky
+description: Email submission failed
+permalink: /error/
+---
+
+<main>
+  <div class="container pb-5">
+    <h1 class="h2">Email submission failed</h1>
+    <p id="errorMessage">
+      The form submission has failed. Please check your browser console for more
+      details or try again later.
+    </p>
+
+    <a href="/" class="btn btn-default mt-3 rounded-24 px-4 py-3 border-2"
+      ><span class="ca-gov-icon-arrow-prev mr-2" aria-hidden="true"></span> Go
+      back to homepage</a
+    >
+  </div>
+</main>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const raw = params.get("error_message");
+
+  if (raw) {
+    // URLSearchParams already decodes, but decodeURIComponent is safe here
+    const decoded = decodeURIComponent(raw);
+
+    // Basic sanitization to prevent HTML injection
+    const safe = decoded.replace(/[<>&]/g, (c) => ({
+      "<": "&lt;",
+      ">": "&gt;",
+      "&": "&amp;"
+    }[c]));
+
+    document.getElementById("errorMessage").textContent = safe;
+  }
+</script>
