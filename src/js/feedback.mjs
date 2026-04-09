@@ -71,7 +71,7 @@ class StaticFeedbackForm {
                 this.thanksGeneral.classList.remove("d-none");
                 this.thanksAdd.classList.add("d-none");
               }
-              window.location.href = redirectSuccessUrl;
+              // No redirect needed; just show the thank you message
               return;
             }
             throw new Error(await response.text());
@@ -79,8 +79,11 @@ class StaticFeedbackForm {
           .catch(error => {
             this.thanksAdd.classList.add("d-none");
             this.thanksGeneral.classList.add("d-none");
-            window.location.href =
-              redirectErrorUrl + encodeURIComponent(error.message);
+            // Show error message instead of redirecting
+            const errorDiv = this.form.querySelector(".js-feedback-error");
+            const errorConsole = this.form.querySelector(".js-error-console");
+            if (errorDiv) errorDiv.classList.remove("d-none");
+            if (errorConsole) errorConsole.textContent = error.message;
           })
           .finally(() => {
             this.submitBtn.disabled = false;
