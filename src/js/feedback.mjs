@@ -1,10 +1,9 @@
-
 // Helper to dynamically add reCAPTCHA script to head (module-level, not per-instance)
 function addRecaptchaScript() {
-  if (!document.getElementById('recaptcha-script')) {
-    const script = document.createElement('script');
-    script.id = 'recaptcha-script';
-    script.src = 'https://www.google.com/recaptcha/api.js';
+  if (!document.getElementById("recaptcha-script")) {
+    const script = document.createElement("script");
+    script.id = "recaptcha-script";
+    script.src = "https://www.google.com/recaptcha/api.js";
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
@@ -72,7 +71,7 @@ class StaticFeedbackForm {
                 this.thanksGeneral.classList.remove("d-none");
                 this.thanksAdd.classList.add("d-none");
               }
-              window.location.href = redirectSuccessUrl;
+              // No redirect needed; just show the thank you message
               return;
             }
             throw new Error(await response.text());
@@ -80,8 +79,11 @@ class StaticFeedbackForm {
           .catch(error => {
             this.thanksAdd.classList.add("d-none");
             this.thanksGeneral.classList.add("d-none");
-            window.location.href =
-              redirectErrorUrl + encodeURIComponent(error.message);
+            // Show error message instead of redirecting
+            const errorDiv = this.form.querySelector(".js-feedback-error");
+            const errorConsole = this.form.querySelector(".js-error-console");
+            if (errorDiv) errorDiv.classList.remove("d-none");
+            if (errorConsole) errorConsole.textContent = error.message;
           })
           .finally(() => {
             this.submitBtn.disabled = false;
@@ -93,9 +95,12 @@ class StaticFeedbackForm {
     this.yesBtn.addEventListener("click", e => {
       e.preventDefault();
       addRecaptchaScript();
+      // Check the Yes radio input
+      const yesRadio = this.yesBtn.querySelector('input[type="radio"]');
+      if (yesRadio) yesRadio.checked = true;
       // Hide the feedback question section
       const questionDiv = this.form.querySelector(".js-feedback-form");
-      if (questionDiv) questionDiv.classList.add("d-none");
+      if (questionDiv) questionDiv.classList.add("visually-hidden");
       // Show the feedback form add section and update label for positive feedback
       this.addDiv.classList.remove("d-none");
       this.label.textContent = "Great! What were you looking for today?";
@@ -105,9 +110,12 @@ class StaticFeedbackForm {
     this.noBtn.addEventListener("click", e => {
       e.preventDefault();
       addRecaptchaScript();
+      // Check the No radio input
+      const noRadio = this.noBtn.querySelector('input[type="radio"]');
+      if (noRadio) noRadio.checked = true;
       // Hide the feedback question section
       const questionDiv = this.form.querySelector(".js-feedback-form");
-      if (questionDiv) questionDiv.classList.add("d-none");
+      if (questionDiv) questionDiv.classList.add("visually-hidden");
       // Show the feedback form add section and update label for negative feedback
       this.addDiv.classList.remove("d-none");
       this.label.textContent = "What was the problem?";
