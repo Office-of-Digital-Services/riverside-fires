@@ -30,11 +30,7 @@
 
 .riverside-gray {
   background-color: var(--riverside-gray);
-  position: relative; /* needed so the pseudo-element below positions relative to this column */
-
-  @media (width >= 992px) {
-    border-right: 12px solid #fff;
-  }
+  position: relative;
 }
 
 @media (width >= 992px) {
@@ -75,9 +71,20 @@
   &::after {
     right: -50%;
   }
+}
 
-  @media (width >= 992px) {
-    border-left: 12px solid #fff;
+@media (width >= 992px) {
+  .riverside-gray-2::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    left: 100%;
+    width: 100vw;
+    background-color: var(--riverside-gray-2);
+    outline: none;
+    pointer-events: none;
   }
 }
 
@@ -375,7 +382,8 @@ form[submit_attempted] .form-control:invalid ~ .error-icon {
 .banner-img-wrap {
   position: relative;
   overflow: hidden;
-  min-height: 300px; /* adjust to match the height of the left column, or set a fixed height */
+  height: 100%;
+  min-height: 300px; /* mobile fallback */
 }
 
 .banner-img {
