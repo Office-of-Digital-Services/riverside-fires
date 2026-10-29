@@ -286,6 +286,10 @@ div.cagov-header-full__1-bottom-bar {
   padding-top: 0.15rem;
   padding-right: 1rem;
 }
+.do-first.do-first--stack .do-first__content ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
 .do-first.do-first--stack .do-first__content p {
   margin: 0;
   padding-right: 0.5rem;
