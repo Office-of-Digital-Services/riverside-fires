@@ -15,7 +15,7 @@ module.exports = async function (
   const domain =
     "https://as-cdt-ods-webserv-riverside-fires-p-001-b7f7d5a2hngha3hz.westus-01.azurewebsites.net/";
 
-  eleventyConfig.addGlobalData("layout", "base-layout");
+  eleventyConfig.addGlobalData("layout", "access-layout");
 
   eleventyConfig.addPassthroughCopy({
     "src/images": "images",
@@ -44,7 +44,7 @@ module.exports = async function (
       /** @type {string} */ css,
       /** @type {string} */ html
     ) {
-      const purge = await new PurgeCSS().purge({
+      const purgeOptions = {
         content: [
           {
             raw: "<html><body>" + html + "</body></html>",
@@ -59,19 +59,42 @@ module.exports = async function (
         safelist: [
           ":focus",
           ":hover",
-          /focus/,
-          "focus-visible",
-          "focus-within",
           ":first-child",
           ":last-child",
-          /cagov-feedback/,
-          /feedback-form/,
-          /cagov-feedback\s*>\s*section\s*>\s*div\.feedback-form/,
           "visually-hidden"
         ],
-        defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+        defaultExtractor: (/** @type {string} */ content) =>
+          content.match(/[\w-/:]+(?<!:)/g) || []
+      };
+      const selectorsPurged = await new PurgeCSS().purge({
+        ...purgeOptions,
+        variables: false
       });
-      return purge[0].css;
+      const cssWithoutDisabledButtonStyles = postcss.parse(
+        selectorsPurged[0].css
+      );
+      const disabledButtonSelectors = new Set([
+        ".btn:disabled",
+        ".btn.disabled",
+        "fieldset:disabled .btn"
+      ]);
+      cssWithoutDisabledButtonStyles.walkRules(rule => {
+        const remainingSelectors = rule.selectors.filter(
+          selector => !disabledButtonSelectors.has(selector.trim())
+        );
+        if (remainingSelectors.length === rule.selectors.length) return;
+        if (remainingSelectors.length === 0) {
+          rule.remove();
+        } else {
+          rule.selectors = remainingSelectors;
+        }
+      });
+      const variablesPurged = await new PurgeCSS().purge({
+        ...purgeOptions,
+        css: [{ raw: cssWithoutDisabledButtonStyles.toString() }],
+        variables: true
+      });
+      return variablesPurged[0].css;
     }
   );
 
