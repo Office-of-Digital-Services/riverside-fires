@@ -51,9 +51,13 @@
       as="font"
       type="font/woff2"
       crossorigin />
+    {% if accessStylesheet %}
+    <link rel="stylesheet" href="{{ accessStylesheet }}" />
+    {% endif %}
   </head>
-  {% set purgeCssHtml %} {{ content | safe }} {% endset -%} {{ cssBundle |
-  purgeCSS(purgeCssHtml) | cssmin | wrapTag('style') | safe }}
+  {% set purgeCssHtml %} {{ content | safe }} {% endset -%} {% if not
+  accessStylesheet %} {{ cssBundle | purgeCSS(purgeCssHtml) | cssmin |
+  wrapTag('style') | safe }} {% endif %}
 
   <body>
     {{ purgeCssHtml | safe }}

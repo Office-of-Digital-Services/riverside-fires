@@ -92,7 +92,7 @@ module.exports = async function (
       const variablesPurged = await new PurgeCSS().purge({
         ...purgeOptions,
         css: [{ raw: cssWithoutDisabledButtonStyles.toString() }],
-        variables: true
+        variables: false
       });
       return variablesPurged[0].css;
     }

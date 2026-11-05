@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: "access/style.css"
+eleventyExcludeFromCollections: true
+---
+
+{%- set accessHtml -%}
+{%- include "../access.html" -%}
+{%- endset -%}
+{{- cssBundle | purgeCSS(accessHtml) | cssmin | safe -}}
